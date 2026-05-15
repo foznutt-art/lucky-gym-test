@@ -1062,11 +1062,13 @@ function calc(){
   set('sPosCash',posCash);set('sPOS',posGrand);set('sExp',expense);set('sOpen',open);
   set('sExpected',closedCalc); // เงินปิดกะคำนวณ
   set('sClose',close);
+  const cashDiff=cash-posCash;
+  const transferDiff=transfer-posTransfer;
   set('sCashDiff',cashDiff);
   set('sTransferDiff',transferDiff);
-  const pd=document.getElementById('pDrawer');if(pd)pd.innerText=money(drawer);
+  const pd=document.getElementById('pDrawer');if(pd)pd.innerText=money(calcDrawer2);
   const cs=document.getElementById('cCloseSub');if(cs)cs.innerText=money(close);
-  const cds=document.getElementById('cDrawerSub');if(cds)cds.innerText=money(drawer);
+  const cds=document.getElementById('cDrawerSub');if(cds)cds.innerText=money(calcDrawer2);
   const cbs=document.getElementById('cBagSub');if(cbs)cbs.innerText=money(bag);
   // อัปเดตหน้าปิดกะ
   const so=(id,v)=>{const e=$(id);if(e)e.innerText=money(v);};
@@ -1159,14 +1161,14 @@ function calc(){
     else{dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:var(--redbg);border:1px solid var(--red);color:#ff8888';dstat.innerText='❌ เงินทอนขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
   }
 
-  const cashDiff=cash-posCash;
-  const transferDiff=transfer-posTransfer;
+
+
   set('sCashDiff',cashDiff);
   set('sTransferDiff',transferDiff);
   set('sPosCash',posCash);
   const sb=(id,cls)=>{const e=$(id);if(e)e.className='sb '+cls;};
-  sb('sbCashDiff',cashDiff===0?'ok':Math.abs(cashDiff)<500?'warn':'bad');
-  sb('sbTransferDiff',transferDiff===0?'ok':Math.abs(transferDiff)<500?'warn':'bad');
+  if(cashDiff!==undefined){sb('sbCashDiff',cashDiff===0?'ok':Math.abs(cashDiff)<500?'warn':'bad');}
+  if(transferDiff!==undefined){sb('sbTransferDiff',transferDiff===0?'ok':Math.abs(transferDiff)<500?'warn':'bad');}
   sb('sbPD',posDiff===0?'ok':'bad');
   sb('sbSD',stockDiff===0?'ok':'bad');
 
