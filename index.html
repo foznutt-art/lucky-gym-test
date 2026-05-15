@@ -342,17 +342,30 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
     <div class="g2" style="gap:6px;margin-bottom:8px">
       <div class="sb"><div class="sb-lbl">ยอดสินค้า</div><div class="sb-val" id="sStock">฿0</div></div>
       <div class="sb"><div class="sb-lbl">ยอดขาย (บริการ)</div><div class="sb-val" id="sSales">฿0</div></div>
-      <div class="sb"><div class="sb-lbl">เงินสดรับ</div><div class="sb-val" id="sCash">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">เงินสดรับจริง</div><div class="sb-val" id="sCash">฿0</div></div>
       <div class="sb"><div class="sb-lbl">โอนรับจริง</div><div class="sb-val" id="sTransfer">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">POS เงินสด</div><div class="sb-val" id="sPosCash">฿0</div></div>
       <div class="sb"><div class="sb-lbl">POS รวม</div><div class="sb-val" id="sPOS">฿0</div></div>
       <div class="sb"><div class="sb-lbl">รายจ่าย</div><div class="sb-val" id="sExp">฿0</div></div>
       <div class="sb"><div class="sb-lbl">เงินในลิ้นชักต้นกะ</div><div class="sb-val" id="sOpen">฿0</div></div>
-      <div class="sb ok"><div class="sb-lbl">เงินปิดกะ (คำนวณ = ต้นกะ+ขาย−จ่าย)</div><div class="sb-val" id="sExpected">฿0</div></div>
-      <div class="sb" style="color:#5ba8ff"><div class="sb-lbl">เงินปิดกะ (รับจริง)</div><div class="sb-val" id="sClose" style="color:#5ba8ff">฿0</div></div>
-
-      <div class="sb" id="sbPD"><div class="sb-lbl">ผลต่าง POS</div><div class="sb-val" id="sPosDiff">฿0</div></div>
+      <div class="sb ok" style="grid-column:span 2"><div class="sb-lbl">เงินปิดกะที่ควรจะเป็น (ต้นกะ+ขาย−จ่าย)</div><div class="sb-val" id="sExpected">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">เงินปิดกะ (รับจริง)</div><div class="sb-val" id="sClose" style="color:var(--bl)">฿0</div></div>
+      <div class="sb" id="sbCashDiff"><div class="sb-lbl">ผลต่างเงินสด (รับจริง vs POS สด)</div><div class="sb-val" id="sCashDiff">฿0</div></div>
+      <div class="sb" id="sbTransferDiff"><div class="sb-lbl">ผลต่างโอน (รับจริง vs POS โอน)</div><div class="sb-val" id="sTransferDiff">฿0</div></div>
+      <div class="sb" id="sbPD"><div class="sb-lbl">ผลต่าง POS รวม</div><div class="sb-val" id="sPosDiff">฿0</div></div>
       <div class="sb" id="sbSD"><div class="sb-lbl">สินค้า vs POS</div><div class="sb-val" id="sStockDiff">฿0</div></div>
-      <div class="sb ok" id="sbBag" style="grid-column:span 2"><div class="sb-lbl" id="sBagLbl">💰 เงินสดใส่ถุง</div><div class="sb-val" id="sBag" style="color:#BBDF32">฿0</div></div>
+      <div class="sb ok" id="sbBag" style="grid-column:span 2"><div class="sb-lbl" id="sBagLbl">💰 เงินสดใส่ถุง</div><div class="sb-val" id="sBag" style="color:var(--g)">฿0</div></div>
+    </div>
+    <!-- ⭐ เปรียบเทียบ 3 ยอด -->
+    <div style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;color:var(--text2);margin-bottom:6px;padding:6px 0;border-bottom:1px solid var(--border)">⭐ เปรียบเทียบยอดรวม (ต้องเท่ากันทั้ง 3)</div>
+      <div class="g2" style="gap:6px;margin-bottom:6px">
+        <div class="sb"><div class="sb-lbl">รวมเงินรับจริง (สด+โอน)</div><div class="sb-val" id="sTotalReal">฿0</div></div>
+        <div class="sb"><div class="sb-lbl">รวมเงิน POS (สด+โอน)</div><div class="sb-val" id="sTotalPOS">฿0</div></div>
+        <div class="sb" style="grid-column:span 2"><div class="sb-lbl">⭐ ยอดขายรวมจากนับของ (สินค้า+บริการ)</div><div class="sb-val" id="sTotalCount">฿0</div></div>
+      </div>
+      <div id="tripleStatus" style="border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;background:var(--sb-bg);border:1px solid var(--border);margin-bottom:6px">กรอกข้อมูลเพื่อเปรียบเทียบ</div>
+
     </div>
     <div class="sbar ok" id="statusBar">กรอกข้อมูลเพื่อสรุปผล</div>
 
@@ -1019,9 +1032,11 @@ function calc(){
   // SMS total แสดงแยก
   const smsTotalEl=document.getElementById('smsTotal');if(smsTotalEl)smsTotalEl.innerText=money(smsTransfer);
   set('sStock',st.sales);set('sSales',salesTotal);set('sCash',cash);set('sTransfer',transfer);
-  set('sPOS',posGrand);set('sExp',expense);set('sOpen',open);
+  set('sPosCash',posCash);set('sPOS',posGrand);set('sExp',expense);set('sOpen',open);
   set('sExpected',closedCalc); // เงินปิดกะคำนวณ
   set('sClose',close);
+  set('sCashDiff',cashDiff);
+  set('sTransferDiff',transferDiff);
   const pd=document.getElementById('pDrawer');if(pd)pd.innerText=money(drawer);
   const cs=document.getElementById('cCloseSub');if(cs)cs.innerText=money(close);
   const cds=document.getElementById('cDrawerSub');if(cds)cds.innerText=money(drawer);
@@ -1029,8 +1044,51 @@ function calc(){
   // อัปเดตหน้าปิดกะ
   const so=(id,v)=>{const e=$(id);if(e)e.innerText=money(v);};
   so('cOpen',open);so('cSales',salesTotal+st.sales);so('cExp',expense);so('cClose',closedCalc);
+  so('sPosCash',posCash);
   set('sPosDiff',posDiff);set('sStockDiff',stockDiff);
   set('sBag',bag);
+  // ⭐ เปรียบเทียบ 3 ยอด
+  const totalReal=cash+transfer;           // รับจริง สด+โอน
+  const totalPOS=posCash+posTransfer;      // POS สด+โอน
+  const totalCount=st.sales+salesTotal;    // นับของ สินค้า+บริการ
+  set('sTotalReal',totalReal);
+  set('sTotalPOS',totalPOS);
+  set('sTotalCount',totalCount);
+  const ts=document.getElementById('tripleStatus');
+  const nb=null;
+  if(ts&&totalReal>0){
+    const allMatch=totalReal===totalPOS&&totalPOS===totalCount;
+    const diff1=totalReal-totalPOS;
+    const diff2=totalPOS-totalCount;
+    if(allMatch){
+      ts.style.cssText='border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;background:var(--gbg);border:1px solid var(--g);color:var(--g);margin-bottom:6px';
+      ts.innerText='✅ ยอดตรงทั้ง 3 — รับเงินถูกต้อง นับของถูกต้อง';
+      if(nb)nb.style.display='none';
+    }else{
+      let msg='❌ ยอดไม่ตรง: ';
+      // อิง POS เป็นหลัก — วิเคราะห์อัตโนมัติ
+      const lines=[];
+      // เปรียบ รับจริง vs POS
+      if(diff1!==0){
+        if(diff1>0) lines.push(`💵 รับเงินสด+โอนจริงมากกว่า POS ฿${Math.abs(diff1).toLocaleString('th-TH')} → อาจรับเงินแล้วไม่ตี POS หรือ POS บันทึกขาด`);
+        else lines.push(`💵 รับเงินสด+โอนจริงน้อยกว่า POS ฿${Math.abs(diff1).toLocaleString('th-TH')} → อาจรับเงินขาด หรือแลกเงินทอนไม่ได้บันทึก`);
+      }
+      // เปรียบ POS vs นับของ
+      if(diff2!==0){
+        if(diff2>0) lines.push(`📦 POS มากกว่ายอดนับของ ฿${Math.abs(diff2).toLocaleString('th-TH')} → อาจตี POS เกิน หรือนับของผิด/ขาด`);
+        else lines.push(`📦 ยอดนับของมากกว่า POS ฿${Math.abs(diff2).toLocaleString('th-TH')} → อาจขายของโดยไม่ตี POS`);
+      }
+      // เปรียบ รับจริง vs นับของ (ผลรวม)
+      const diff3=totalReal-totalCount;
+      if(diff3!==0){
+        if(diff3>0) lines.push(`⚠️ รับเงินรวมมากกว่ายอดนับของ ฿${Math.abs(diff3).toLocaleString('th-TH')} → อาจมีรายรับที่ไม่ได้บันทึกสินค้า`);
+        else lines.push(`⚠️ รับเงินรวมน้อยกว่ายอดนับของ ฿${Math.abs(diff3).toLocaleString('th-TH')} → เงินขาด พนักงานต้องชดใช้หรือตรวจสอบ`);
+      }
+      ts.style.cssText='border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;background:var(--redbg);border:1px solid var(--red);color:var(--red);margin-bottom:6px;line-height:1.8';
+      ts.innerHTML='❌ ยอดไม่ตรง<br>'+lines.join('<br>');
+      if(nb)nb.style.display='none';
+    }
+  }
   // อัปเดต drawer target label
   const dtLbl2=document.getElementById('drawerTargetLbl');
   if(dtLbl2)dtLbl2.innerText=drawerTarget.toLocaleString('th-TH');
@@ -1056,7 +1114,14 @@ function calc(){
     else{dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:var(--redbg);border:1px solid var(--red);color:#ff8888';dstat.innerText='❌ เงินทอนขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
   }
 
+  const cashDiff=cash-posCash;
+  const transferDiff=transfer-posTransfer;
+  set('sCashDiff',cashDiff);
+  set('sTransferDiff',transferDiff);
+  set('sPosCash',posCash);
   const sb=(id,cls)=>{const e=$(id);if(e)e.className='sb '+cls;};
+  sb('sbCashDiff',cashDiff===0?'ok':Math.abs(cashDiff)<500?'warn':'bad');
+  sb('sbTransferDiff',transferDiff===0?'ok':Math.abs(transferDiff)<500?'warn':'bad');
   sb('sbPD',posDiff===0?'ok':'bad');
   sb('sbSD',stockDiff===0?'ok':'bad');
 
