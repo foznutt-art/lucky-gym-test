@@ -75,6 +75,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 .btn-gr{background:#063a1a;color:#55cc88;border:1px solid #0a6030}
 /* grid */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3sum{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 /* pill */
 .pill{background:var(--pill-bg);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-top:8px}
@@ -304,11 +305,6 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
   </div>
 
   <div class="card">
-    <div class="card-title">💵 เงินสดรับจริง</div>
-    <div><label>เงินสดรับจริง</label><input id="iCash" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
-  </div>
-
-  <div class="card">
     <div class="card-title">📲 ยอดโอนรับจริง (กรอกเอง)</div>
     <div style="font-size:11px;color:var(--mu);margin-bottom:8px">กรอกยอดโอนรวมที่รับจริงทั้งวัน — แยกจากระบบ SMS ด้านบน</div>
     <div><label>ยอดโอนรับจริง (฿)</label><input id="iTransferManual" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
@@ -339,22 +335,34 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 <div id="tSum" class="sec">
   <div class="card">
     <div class="card-title">📊 สรุปปิดกะ</div>
-    <div class="g2" style="gap:6px;margin-bottom:8px">
+    <div class="g3sum" style="margin-bottom:8px">
       <div class="sb"><div class="sb-lbl">ยอดสินค้า</div><div class="sb-val" id="sStock">฿0</div></div>
       <div class="sb"><div class="sb-lbl">ยอดขาย (บริการ)</div><div class="sb-val" id="sSales">฿0</div></div>
-      <div class="sb"><div class="sb-lbl">เงินสดรับจริง</div><div class="sb-val" id="sCash">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">เงินสดรับจริง (คำนวณ)</div><div class="sb-val" id="sCash">฿0</div></div>
       <div class="sb"><div class="sb-lbl">โอนรับจริง</div><div class="sb-val" id="sTransfer">฿0</div></div>
       <div class="sb"><div class="sb-lbl">POS เงินสด</div><div class="sb-val" id="sPosCash">฿0</div></div>
       <div class="sb"><div class="sb-lbl">POS รวม</div><div class="sb-val" id="sPOS">฿0</div></div>
       <div class="sb"><div class="sb-lbl">รายจ่าย</div><div class="sb-val" id="sExp">฿0</div></div>
       <div class="sb"><div class="sb-lbl">เงินในลิ้นชักต้นกะ</div><div class="sb-val" id="sOpen">฿0</div></div>
-      <div class="sb ok" style="grid-column:span 2"><div class="sb-lbl">เงินปิดกะที่ควรจะเป็น (ต้นกะ+ขาย−จ่าย)</div><div class="sb-val" id="sExpected">฿0</div></div>
-      <div class="sb"><div class="sb-lbl">เงินปิดกะ (รับจริง)</div><div class="sb-val" id="sClose" style="color:var(--bl)">฿0</div></div>
+      <div class="sb ok" style="grid-column:span 3"><div class="sb-lbl">เงินปิดกะที่ควรจะเป็น (ต้นกะ+ขาย−จ่าย)</div><div class="sb-val" id="sExpected">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">เงินในลิ้นชักท้ายกะ (รับจริง)</div><div class="sb-val" id="sClose" style="color:var(--bl)">฿0</div></div>
       <div class="sb" id="sbCashDiff"><div class="sb-lbl">ผลต่างเงินสด (รับจริง vs POS สด)</div><div class="sb-val" id="sCashDiff">฿0</div></div>
       <div class="sb" id="sbTransferDiff"><div class="sb-lbl">ผลต่างโอน (รับจริง vs POS โอน)</div><div class="sb-val" id="sTransferDiff">฿0</div></div>
       <div class="sb" id="sbPD"><div class="sb-lbl">ผลต่าง POS รวม</div><div class="sb-val" id="sPosDiff">฿0</div></div>
       <div class="sb" id="sbSD"><div class="sb-lbl">สินค้า vs POS</div><div class="sb-val" id="sStockDiff">฿0</div></div>
-      <div class="sb ok" id="sbBag" style="grid-column:span 2"><div class="sb-lbl" id="sBagLbl">💰 เงินสดใส่ถุง</div><div class="sb-val" id="sBag" style="color:var(--g)">฿0</div></div>
+      <div class="sb ok" id="sbBag" style="grid-column:span 3"><div class="sb-lbl" id="sBagLbl">💰 เงินสดใส่ถุง</div><div class="sb-val" id="sBag" style="color:var(--g)">฿0</div></div>
+    </div>
+    <!-- สรุปสมาชิกรายวัน/รายเดือน -->
+    <div style="margin-bottom:8px">
+      <div style="font-size:12px;font-weight:800;color:var(--text2);margin-bottom:6px;padding:6px 0;border-bottom:1px solid var(--border)">👥 สรุปสมาชิก</div>
+      <div class="g3sum" style="margin-bottom:4px">
+        <div class="sb"><div class="sb-lbl">รายวันผู้ใหญ่</div><div style="font-size:16px;font-weight:900;color:var(--text)" id="mDailyAdult">0 คน</div></div>
+        <div class="sb"><div class="sb-lbl">รายวันเด็ก</div><div style="font-size:16px;font-weight:900;color:var(--text)" id="mDailyKid">0 คน</div></div>
+        <div class="sb"><div class="sb-lbl">รายวันรวม</div><div style="font-size:16px;font-weight:900;color:var(--g)" id="mDailyTotal">฿0</div></div>
+        <div class="sb"><div class="sb-lbl">รายเดือน เก่า</div><div style="font-size:16px;font-weight:900;color:var(--text)" id="mMonthOld">0 คน</div></div>
+        <div class="sb"><div class="sb-lbl">รายเดือน ใหม่</div><div style="font-size:16px;font-weight:900;color:var(--text)" id="mMonthNew">0 คน</div></div>
+        <div class="sb"><div class="sb-lbl">รายเดือนรวม</div><div style="font-size:16px;font-weight:900;color:var(--g)" id="mMonthTotal">฿0</div></div>
+      </div>
     </div>
     <!-- ⭐ เปรียบเทียบ 3 ยอด -->
     <div style="margin-bottom:8px">
@@ -372,30 +380,24 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
     <!-- เงินทอนพรุ่งนี้ (กะบ่ายเท่านั้น) -->
     <div id="drawerSection" style="margin-top:10px;display:none">
       <div style="background:var(--hint-bg);border:1px solid var(--wh-border);border-radius:14px;padding:14px">
-        <div style="font-size:13px;font-weight:700;color:#5ba8ff;margin-bottom:6px">🗄 เงินทอนพรุ่งนี้ (นับแบงค์ที่จะเหลือไว้)</div>
-        <div style="font-size:11px;color:#555;margin-bottom:10px">target ฿<span id="drawerTargetLbl">1,500</span> · กะเช้าข้ามได้</div>
-        <div id="drawerCash"></div>
-        <div class="pill" style="background:#050a15;border-color:#1a2a3a;margin-top:8px">
-          <div class="pill-lbl">รวมเงินทอน</div>
-          <div class="pill-num" id="pDrawer" style="color:#5ba8ff">฿0</div>
+        <div style="font-size:13px;font-weight:700;color:var(--bl);margin-bottom:4px">🗄 เงินทอนในลิ้นชักสิ้นวัน</div>
+        <div style="font-size:11px;color:var(--mu);margin-bottom:10px">กรอกยอดรวมที่จะเหลือไว้ · target ฿<span id="drawerTargetLbl">3,000</span></div>
+        <div style="margin-bottom:8px">
+          <label>ยอดเงินทอนที่เหลือไว้ (฿)</label>
+          <input id="iDrawerAmt" type="number" inputmode="numeric" placeholder="3000" oninput="calcDrawer();saveDraft()" style="font-size:20px;font-weight:700;text-align:center">
         </div>
-        <div id="drawerStatus" style="margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:#0a0a0a;border:1px solid #222;color:#555"></div>
-        <div style="margin-top:8px">
-          <label style="font-size:12px;color:#888;display:flex;align-items:center;gap:8px;cursor:pointer">
-            <input type="checkbox" id="drawerNote" onchange="toggleDrawerNote()" style="width:16px;height:16px;accent-color:#ffaa33">
-            <span>⚠️ แบงค์ไม่ลงตัว / หมายเหตุ</span>
-          </label>
-          <div id="drawerNoteBox" style="display:none;margin-top:6px">
-            <input id="drawerNoteText" type="text" placeholder="เช่น มีแต่แบงค์ 1,000 เหลือ 2,000 แทน 1,500" oninput="saveDraft()">
-          </div>
+        <div id="drawerStatus" style="border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--sb-bg);border:1px solid var(--border);color:var(--mu);margin-bottom:8px"></div>
+        <div style="background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:var(--mu)">
+          <div style="margin-bottom:4px">ลิ้นชักท้ายกะ (นับจริง): <span id="cCloseSub" style="color:var(--text);font-weight:700">฿0</span></div>
+          <div style="margin-bottom:4px">− เงินทอนที่เหลือไว้: <span id="cDrawerSub" style="color:var(--bl);font-weight:700">฿0</span></div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;font-size:14px">= เงินใส่ถุง: <span id="cBagSub" style="color:var(--g);font-weight:900;font-size:18px">฿0</span></div>
         </div>
-        <div style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12px;color:#888">
-          <div style="margin-bottom:4px">เงินปิดกะ (นับจริง): <span id="cCloseSub" style="color:#eee;font-weight:700">฿0</span></div>
-          <div style="margin-bottom:4px">− เงินทอน: <span id="cDrawerSub" style="color:#5ba8ff;font-weight:700">฿0</span></div>
-          <div style="border-top:1px solid #222;padding-top:6px;font-size:13px">= เงินใส่ถุง: <span id="cBagSub" style="color:#BBDF32;font-weight:900;font-size:16px">฿0</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--mu)">📝 หมายเหตุ (ถ้าผิดปกติ)</div>
+          <button class="btn btn-sec btn-sm" onclick="addDrawerNote()" style="margin:0;font-size:11px">+ เพิ่ม</button>
         </div>
-      </div>
-    </div>
+        <div id="drawerNoteRows"></div>
+      </div></div>
     <button class="btn" onclick="saveShift()" style="margin-top:10px">💾 บันทึกกะนี้</button>
     <button class="btn btn-red" onclick="askClear('all')" style="margin-top:6px">🗑 ล้างข้อมูลกะนี้</button>
   </div>
@@ -452,7 +454,6 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 </div>
 
 <script>
-'use strict';
 const GAS='https://script.google.com/macros/s/AKfycbxJupKM-sQV9fvaqIvHInKLxa_I-1uA47BZHqCzMCslOGJB4VCco0gckMApj76TiTyncw/exec';
 const products=[{"cat": "เครื่องดื่ม", "name": "น้ำเปล่า เล็ก", "price": 10}, {"cat": "เครื่องดื่ม", "name": "น้ำเปล่า ใหญ่", "price": 15}, {"cat": "เครื่องดื่ม", "name": "น้ำแร่ เล็ก", "price": 15}, {"cat": "เครื่องดื่ม", "name": "น้ำแร่ ใหญ่", "price": 25}, {"cat": "เครื่องดื่ม", "name": "เกลือแร่ยันฮี", "price": 15}, {"cat": "เครื่องดื่ม", "name": "เกเตอเรด ฟ้า", "price": 20}, {"cat": "เครื่องดื่ม", "name": "เกเตอเรด เหลือง", "price": 20}, {"cat": "เครื่องดื่ม", "name": "เกเตอเรด องุ่น", "price": 30}, {"cat": "เครื่องดื่ม", "name": "เกเตอเรด สตรอ", "price": 30}, {"cat": "เครื่องดื่ม", "name": "โค้ก zero", "price": 17}, {"cat": "เครื่องดื่ม", "name": "โค้ก original", "price": 17}, {"cat": "เครื่องดื่ม", "name": "ชเวป", "price": 17}, {"cat": "เครื่องดื่ม", "name": "ชเวป zero", "price": 17}, {"cat": "เครื่องดื่ม", "name": "แฟนต้า แดง", "price": 17}, {"cat": "เครื่องดื่ม", "name": "แฟนต้า ส้ม", "price": 17}, {"cat": "เครื่องดื่ม", "name": "แฟนต้า เขียว", "price": 17}, {"cat": "เครื่องดื่ม", "name": "ยันฮี", "price": 20}, {"cat": "เครื่องดื่ม", "name": "มินิทเมด", "price": 20}, {"cat": "เครื่องดื่ม", "name": "ลิปตัน", "price": 15}, {"cat": "เครื่องดื่ม", "name": "นมไฮโปรตีน", "price": 50}, {"cat": "เครื่องดื่ม", "name": "อกไก่ปั่น LF", "price": 110}, {"cat": "เครื่องดื่ม", "name": "อกไก่ปั่น max", "price": 100}, {"cat": "เครื่องดื่ม", "name": "โทฟูซัง", "price": 45}, {"cat": "เครื่องดื่ม", "name": "Benefitt", "price": 50}, {"cat": "เครื่องดื่ม", "name": "น้ำมะพร้าว", "price": 30}, {"cat": "ขนม/อื่นๆ", "name": "โอ๊ตผลไม้", "price": 45}, {"cat": "ขนม/อื่นๆ", "name": "กล้วยหอม", "price": 10}, {"cat": "ขนม/อื่นๆ", "name": "ป็อกกี้", "price": 10}, {"cat": "ขนม/อื่นๆ", "name": "ทาโร่", "price": 25}, {"cat": "ขนม/อื่นๆ", "name": "Julies", "price": 10}, {"cat": "ขนม/อื่นๆ", "name": "การาโนล่า", "price": 15}, {"cat": "ขนม/อื่นๆ", "name": "ขนมข้าวกล้องอบ", "price": 30}, {"cat": "ขนม/อื่นๆ", "name": "หงส์ไทย", "price": 40}, {"cat": "ขนม/อื่นๆ", "name": "หงส์ไทยหลอด", "price": 35}, {"cat": "ขนม/อื่นๆ", "name": "ยาดม โป๊ยเซียน", "price": 30}, {"cat": "ขนม/อื่นๆ", "name": "ยาดม ครูเฟิร์น", "price": 89}, {"cat": "ขนม/อื่นๆ", "name": "เวย์ ผง", "price": 45}, {"cat": "ขนม/อื่นๆ", "name": "ถุงเท้า", "price": 30}, {"cat": "ขนม/อื่นๆ", "name": "ไอติม โมจิ", "price": 40}, {"cat": "ขนม/อื่นๆ", "name": "ไอติม 80ml", "price": 45}, {"cat": "ขนม/อื่นๆ", "name": "เสื้อกันฝน", "price": 30}];
 const SALES_ITEMS=["รายวันผู้ใหญ่", "รายวันเด็ก", "รายเดือน เก่า", "รายเดือน ใหม่", "รายเดือน เทรนเนอร์", "ราย 3 เดือน", "ราย 6 เดือน", "ราย 1 ปี", "PT session", "ผ้าขนหนูS", "ผ้าขนหนูL", "เครื่องชั่ง", "อื่นๆ"];
@@ -525,13 +526,13 @@ function init(){
   if(savedTheme==='dark'){document.body.classList.add('dark');const b=document.getElementById('themeBtn');if(b)b.innerText='☀️';}
   makeMoney('openCash','o');
   makeMoney('closeCash','c');
-  makeMoney('drawerCash','d');
   buildStock();
   buildServices();
   loadDraft();
   buildSalesDraft();
   calc();
   renderHist();
+  loadDrawerNotes();
   syncStateFromServer();
 }
 
@@ -540,12 +541,6 @@ const $=id=>document.getElementById(id);
 const num=id=>Number($(id)?.value)||0;
 
 // ── Shift ──
-function toggleDrawerNote(){
-  const cb=document.getElementById('drawerNote');
-  const box=document.getElementById('drawerNoteBox');
-  if(box)box.style.display=cb?.checked?'block':'none';
-}
-
 function toggleTheme(){
   const isDark=document.body.classList.toggle('dark');
   localStorage.setItem('lucky_theme',isDark?'dark':'light');
@@ -577,11 +572,42 @@ function makeMoney(cid,pre){
 }
 
 function drawerTotal(){
-  return BILLS.reduce((s,b)=>{
-    const q=Number($('d'+b)?.value)||0;
-    const el=$('d'+b+'v');if(el)el.innerText=money(q*b);
-    return s+q*b;
-  },0);
+  return Number($('iDrawerAmt')?.value)||0;
+}
+
+function calcDrawer(){
+  const drawer=drawerTotal();
+  const shiftFloat=Number($('iShiftFloat')?.value)||3000;
+  const ds=$('drawerStatus');
+  const dtLbl=$('drawerTargetLbl');
+  if(dtLbl)dtLbl.innerText=shiftFloat.toLocaleString('th-TH');
+  if(ds&&drawer>0){
+    const diff=drawer-shiftFloat;
+    if(diff===0){ds.style.cssText='border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--gbg);border:1px solid var(--g);color:var(--g);margin-bottom:8px';ds.innerText='✅ ตรง target ฿'+shiftFloat.toLocaleString('th-TH');}
+    else if(diff<0){ds.style.cssText='border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--redbg);border:1px solid var(--red);color:var(--red);margin-bottom:8px';ds.innerText='⚠️ ต่ำกว่า target ฿'+Math.abs(diff).toLocaleString('th-TH')+' (เงินทอนไม่พอ)';}
+    else{ds.style.cssText='border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--orbg);border:1px solid var(--or);color:var(--or);margin-bottom:8px';ds.innerText='⚠️ สูงกว่า target ฿'+Math.abs(diff).toLocaleString('th-TH')+' (เงินทอนเกิน)';}
+  }
+  calc();
+}
+
+function addDrawerNote(text=''){
+  const box=$('drawerNoteRows');if(!box)return;
+  const r=document.createElement('div');r.style.cssText='display:flex;gap:6px;align-items:center;margin-bottom:6px';
+  r.innerHTML=`<input type="text" value="${text}" placeholder="เช่น ไม่มีเงินใส่ถุง / เหลือทอนไม่ถึง target..." style="flex:1;font-size:13px" oninput="saveDrawerNotes()"><button class="btn btn-red" onclick="this.closest('div').remove();saveDrawerNotes()" style="width:36px;height:36px;padding:0;margin:0;font-size:15px;border-radius:9px;flex-shrink:0">×</button>`;
+  box.appendChild(r);
+}
+
+function saveDrawerNotes(){
+  const notes=[...document.querySelectorAll('#drawerNoteRows input')].map(e=>e.value).filter(v=>v);
+  localStorage.setItem('lucky_drawer_notes',JSON.stringify(notes));
+}
+
+function loadDrawerNotes(){
+  try{JSON.parse(localStorage.getItem('lucky_drawer_notes')||'[]').forEach(n=>addDrawerNote(n));}catch(e){}
+}
+
+function getDrawerNotes(){
+  return[...document.querySelectorAll('#drawerNoteRows input')].map(e=>e.value).filter(v=>v);
 }
 
 function totalMoney(pre){
@@ -606,7 +632,6 @@ function buildStock(){
   const fridgeBox=$('stockList-fridge');
   const counterBox=$('stockList-counter');
   if(!fridgeBox||!counterBox)return;
-  const FRIDGE=["น้ำเปล่า เล็ก", "น้ำเปล่า ใหญ่", "น้ำแร่ เล็ก", "น้ำแร่ ใหญ่", "เกลือแร่ยันฮี", "เกเตอเรด ฟ้า", "เกเตอเรด เหลือง", "เกเตอเรด องุ่น", "เกเตอเรด สตรอ", "โค้ก zero", "โค้ก original", "ชเวป", "ชเวป zero", "แฟนต้า แดง", "แฟนต้า ส้ม", "แฟนต้า เขียว", "ยันฮี", "มินิทเมด", "ลิปตัน", "นมไฮโปรตีน", "อกไก่ปั่น LF", "อกไก่ปั่น max", "โทฟูซัง", "Benefitt", "น้ำมะพร้าว", "โอ๊ตผลไม้"];
   let htmlF='',htmlC='';
 
   const cats=[...new Set(products.map(p=>p.cat))];
@@ -615,7 +640,7 @@ function buildStock(){
     products.forEach((p,i)=>{
       if(p.cat!==cat)return;
       const whv=Number(warehouse[i])||0;
-      const isFridge=FRIDGE.includes(p.name);
+      const isFridge=FRIDGE_ITEMS.includes(p.name);
       const unitLabel=UNIT_MAP[p.name]?`<span class="wh-unit">1 ${UNIT_MAP[p.name].unit} = ${UNIT_MAP[p.name].size} ${p.name.includes('โค้ก')||p.name.includes('เวป')||p.name.includes('แฟนต้า')?'กระป๋อง':'ขวด'}</span>`:'';
       const sc=`<div class="sc" id="sr${i}">
         <div class="sc-hdr"><span class="sc-name">${p.name}</span><span class="sc-price">฿${p.price}</span></div>
@@ -1006,7 +1031,9 @@ async function ocrOne(file,s){
 function calc(){
   const st=stockCalc();
   const open=totalMoney('o'),close=totalMoney('c');
-  const cash=num('iCash'),transfer=num('iTransferManual'),smsTransfer=trTotal(),expense=num('iExpense');
+  const transfer=num('iTransferManual'),smsTransfer=trTotal(),expense=num('iExpense');
+  // เงินสดรับจริง = ลิ้นชักท้ายกะ - ลิ้นชักต้นกะ + รายจ่าย
+  const cash=Math.max(0,close-open+expense);
   const posGrand=num('iPosGrand'),posCash=num('iPosCash'),posTransfer=num('iPosTransfer');
   const salesTotal=calcSales()+calcServices();
   const expected=open+cash-expense;
@@ -1016,17 +1043,17 @@ function calc(){
   const stockDiff=st.sales-posGrand;
 
   const shiftType=document.getElementById('iShift')?.value||'เช้า';
-  const shiftFloat=Number(document.getElementById('iShiftFloat')?.value)||3000;
+  const calcShiftFloat=Number(document.getElementById('iShiftFloat')?.value)||3000; // renamed to avoid dup
   // สูตรใหม่:
   // เงินปิดกะ (คำนวณ) = เปิดกะ + สดรับ - รายจ่าย
   // ลิ้นชัก = นับธนบัตรจริงในหน้าปิดกะ
   // เงินใส่ถุง = ปิดกะคำนวณ - ลิ้นชัก
   // กะเช้า: ไม่มีใส่ถุง
-  const drawerTarget=shiftFloat;
+  const drawerTarget=calcShiftFloat;
   closedCalc=open+cash-expense; // เงินปิดกะที่ควรมี
-  const drawer=drawerTotal();          // เงินทอนที่จะเหลือไว้
-  const bag=shiftType==='บ่าย'?Math.max(0,close-drawer):0;
-  const drawerDiff=drawer-drawerTarget;
+  const calcDrawer2=drawerTotal();          // เงินทอนที่จะเหลือไว้
+  const bag=shiftType==='บ่าย'?Math.max(0,close-calcDrawer2):0;
+  const drawerDiff=calcDrawer2-calcShiftFloat;
   const set=(id,v)=>{const e=$(id);if(e)e.innerText=money(v);};
   set('pStockSales',st.sales);set('pOpen',open);set('pClose',close);set('pTransfer',transfer);
   // SMS total แสดงแยก
@@ -1047,6 +1074,24 @@ function calc(){
   so('sPosCash',posCash);
   set('sPosDiff',posDiff);set('sStockDiff',stockDiff);
   set('sBag',bag);
+  // สรุปสมาชิก
+  const svcs=getServicesData();
+  const dailyAdult=svcs.filter(s=>s.name==='รายวันผู้ใหญ่').reduce((a,s)=>a+s.qty,0);
+  const dailyKid=svcs.filter(s=>s.name==='รายวันเด็ก').reduce((a,s)=>a+s.qty,0);
+  const dailyAdultAmt=svcs.filter(s=>s.name==='รายวันผู้ใหญ่').reduce((a,s)=>a+s.subtotal,0);
+  const dailyKidAmt=svcs.filter(s=>s.name==='รายวันเด็ก').reduce((a,s)=>a+s.subtotal,0);
+  const monthOld=svcs.filter(s=>s.name==='รายเดือน เก่า').reduce((a,s)=>a+s.qty,0);
+  const monthNew=svcs.filter(s=>s.name==='รายเดือน ใหม่').reduce((a,s)=>a+s.qty,0);
+  const monthOldAmt=svcs.filter(s=>s.name==='รายเดือน เก่า').reduce((a,s)=>a+s.subtotal,0);
+  const monthNewAmt=svcs.filter(s=>s.name==='รายเดือน ใหม่').reduce((a,s)=>a+s.subtotal,0);
+  const mda=$('mDailyAdult');if(mda)mda.innerText=dailyAdult+' คน'+(dailyAdultAmt?' ('+money(dailyAdultAmt)+')':'');
+  const mdk=$('mDailyKid');if(mdk)mdk.innerText=dailyKid+' คน'+(dailyKidAmt?' ('+money(dailyKidAmt)+')':'');
+  const mdt=$('mDailyTotal');if(mdt)mdt.innerText=money(dailyAdultAmt+dailyKidAmt);
+  const mmo=$('mMonthOld');if(mmo)mmo.innerText=monthOld+' คน'+(monthOldAmt?' ('+money(monthOldAmt)+')':'');
+  const mmn=$('mMonthNew');if(mmn)mmn.innerText=monthNew+' คน'+(monthNewAmt?' ('+money(monthNewAmt)+')':'');
+  const mmt=$('mMonthTotal');if(mmt)mmt.innerText=money(monthOldAmt+monthNewAmt);
+  lastC.dailyAdult=dailyAdult;lastC.dailyKid=dailyKid;
+  lastC.monthOld=monthOld;lastC.monthNew=monthNew;
   // ⭐ เปรียบเทียบ 3 ยอด
   const totalReal=cash+transfer;           // รับจริง สด+โอน
   const totalPOS=posCash+posTransfer;      // POS สด+โอน
@@ -1138,8 +1183,8 @@ function calc(){
     open,close,cash,transfer,expense,expected,diff,
     posGrand,posCash,posTransfer,appGrand,posDiff,stockDiff,
     salesData:[...getSalesData(),...getServicesData()],salesTotal,
-    expenseNote:getExpensesData().map(e=>e.note+(e.amount?'(฿'+e.amount+')':'')).join(', '),drawerNote:document.getElementById('drawerNoteText')?.value||'',bag,
-    staff:$('iStaff')?.value||'',shift:shiftType,shiftFloat,
+    expenseNote:getExpensesData().map(e=>e.note+(e.amount?'(฿'+e.amount+')':'')).join(', '),drawerNotes:getDrawerNotes().join(' / '),bag,
+    staff:$('iStaff')?.value||'',shift:shiftType,calcShiftFloat,
     date:$('iDate')?.value||''
   };
 }
@@ -1151,7 +1196,7 @@ function saveDraft(){
   // ไม่ save warehouse ใน draft — warehouse เป็น persistent แยก
   SERVICES.forEach((s,i)=>{const n=$('svcn'+i)?.value;if(n)d['svcn'+i]=n;const p=$('svcp'+i)?.value;if(p)d['svcp'+i]=p;});
   BILLS.forEach(b=>['o','c','d'].forEach(p=>{const v=$(`${p}${b}`)?.value;if(v)d[p+b]=v;}));
-  ['iDate','iStaff','iShift','iShiftFloat','iCash','iTransferManual','iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand','drawerNoteText'].forEach(k=>{d[k]=$$(k)?.value||'';});
+  ['iDate','iStaff','iShift','iShiftFloat','iTransferManual','iDrawerAmt','iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand','drawerNoteText'].forEach(k=>{d[k]=$$(k)?.value||'';});
   localStorage.setItem('lucky_draft',JSON.stringify(d));
 }
 
@@ -1178,7 +1223,8 @@ function buildSalesDraft(){
 }
 
 function clearDraft(){
-  ['lucky_draft','lucky_sales_draft','lucky_exp_draft'].forEach(k=>localStorage.removeItem(k));
+  ['lucky_draft','lucky_sales_draft','lucky_exp_draft','lucky_drawer_notes'].forEach(k=>localStorage.removeItem(k));
+  const box=$('drawerNoteRows');if(box)box.innerHTML='';
 }
 
 // ── Prev left ──
@@ -1267,7 +1313,7 @@ function askClear(target){
       $('salesRows').innerHTML='';
       $('expenseRows').innerHTML='';calcExpenses();
       BILLS.forEach(b=>['o','c'].forEach(p=>{const e=$(`${p}${b}`);if(e)e.value='';}));
-      ['iCash','iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand'].forEach(k=>{const e=$(k);if(e)e.value='';});
+      ['iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand'].forEach(k=>{const e=$(k);if(e)e.value='';});
       clearDraft();calc();updateTrCount();
     }else if(target.startsWith('sale:')){
       const el=$(target.slice(5));if(el)el.remove();
