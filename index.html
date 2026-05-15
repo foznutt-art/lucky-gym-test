@@ -300,12 +300,18 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
       <button class="btn btn-sec btn-sm" onclick="addTransfer()" style="margin:0">+ เพิ่มเอง</button>
     </div>
     <div id="transferRows"></div>
-    <div class="pill"><div class="pill-lbl">รวมยอดโอน</div><div class="pill-num" id="pTransfer">฿0</div></div>
+    <div class="pill"><div class="pill-lbl">รวม SMS (ตรวจสอบเท่านั้น)</div><div class="pill-num" id="smsTotal" style="color:var(--bl)">฿0</div></div>
   </div>
 
   <div class="card">
     <div class="card-title">💵 เงินสดรับจริง</div>
     <div><label>เงินสดรับจริง</label><input id="iCash" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📲 ยอดโอนรับจริง (กรอกเอง)</div>
+    <div style="font-size:11px;color:var(--mu);margin-bottom:8px">กรอกยอดโอนรวมที่รับจริงทั้งวัน — แยกจากระบบ SMS ด้านบน</div>
+    <div><label>ยอดโอนรับจริง (฿)</label><input id="iTransferManual" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
   </div>
 
   <div class="card">
@@ -987,7 +993,7 @@ async function ocrOne(file,s){
 function calc(){
   const st=stockCalc();
   const open=totalMoney('o'),close=totalMoney('c');
-  const cash=num('iCash'),transfer=trTotal(),expense=num('iExpense');
+  const cash=num('iCash'),transfer=num('iTransferManual'),smsTransfer=trTotal(),expense=num('iExpense');
   const posGrand=num('iPosGrand'),posCash=num('iPosCash'),posTransfer=num('iPosTransfer');
   const salesTotal=calcSales()+calcServices();
   const expected=open+cash-expense;
@@ -1010,6 +1016,8 @@ function calc(){
   const drawerDiff=drawer-drawerTarget;
   const set=(id,v)=>{const e=$(id);if(e)e.innerText=money(v);};
   set('pStockSales',st.sales);set('pOpen',open);set('pClose',close);set('pTransfer',transfer);
+  // SMS total แสดงแยก
+  const smsTotalEl=document.getElementById('smsTotal');if(smsTotalEl)smsTotalEl.innerText=money(smsTransfer);
   set('sStock',st.sales);set('sSales',salesTotal);set('sCash',cash);set('sTransfer',transfer);
   set('sPOS',posGrand);set('sExp',expense);set('sOpen',open);
   set('sExpected',closedCalc); // เงินปิดกะคำนวณ
@@ -1078,7 +1086,7 @@ function saveDraft(){
   // ไม่ save warehouse ใน draft — warehouse เป็น persistent แยก
   SERVICES.forEach((s,i)=>{const n=$('svcn'+i)?.value;if(n)d['svcn'+i]=n;const p=$('svcp'+i)?.value;if(p)d['svcp'+i]=p;});
   BILLS.forEach(b=>['o','c','d'].forEach(p=>{const v=$(`${p}${b}`)?.value;if(v)d[p+b]=v;}));
-  ['iDate','iStaff','iShift','iShiftFloat','iCash','iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand','drawerNoteText'].forEach(k=>{d[k]=$$(k)?.value||'';});
+  ['iDate','iStaff','iShift','iShiftFloat','iCash','iTransferManual','iExpense','iExpNote','iPosCash','iPosTransfer','iPosGrand','drawerNoteText'].forEach(k=>{d[k]=$$(k)?.value||'';});
   localStorage.setItem('lucky_draft',JSON.stringify(d));
 }
 
