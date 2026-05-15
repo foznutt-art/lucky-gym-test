@@ -5,112 +5,146 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <title>Lucky Gym</title>
 <style>
+:root{
+  --bg:#eef0f3;--bg2:#f5f7fa;--card:#ffffff;--border:#d0d5dd;--text:#111;--text2:#444;
+  --mu:#777;--g:#5a9e00;--gbg:#e8f5d0;--red:#cc2222;--redbg:#ffeaea;
+  --or:#cc7700;--orbg:#fff3d0;--bl:#1a6aaa;--pu:#7733cc;
+  --input-bg:#ffffff;--input-border:#bbb;--pill-bg:#f0f0f0;
+  --sb-bg:#f0f2f5;--sb-border:#d0d5dd;--hint-bg:#e8f0fa;--hint-color:#3366aa;
+  --wh-bg:#e8f0fa;--wh-border:#aaccee;--wh-inp:#fff;
+  --tab-bg:#e8e8e8;--tab-color:#666;--tab-on-bg:#5a9e00;--tab-on-color:#fff;
+  --own-bg:#f0e8ff;--own-color:#6622aa;--own-border:#cc99ff;
+  --sbar-ok-bg:#d0f0c0;--sbar-ok-color:#225500;
+  --sbar-bad-bg:#ffd0d0;--sbar-bad-color:#881111;
+  --sbar-warn-bg:#fff0c0;--sbar-warn-color:#775500;
+  --hist-bg:#fafafa;--hist-border:#e0e0e0;
+}
+body.dark{
+  --bg:#0a0a0a;--bg2:#111;--card:#111;--border:#222;--text:#f0f0f0;--text2:#bbb;
+  --mu:#666;--g:#BBDF32;--gbg:#1a3a00;--red:#ff6b6b;--redbg:#1a0505;
+  --or:#ffaa33;--orbg:#1a0f00;--bl:#5ba8ff;--pu:#cc88ff;
+  --input-bg:#0a0a0a;--input-border:#2a2a2a;--pill-bg:#0f0f0f;
+  --sb-bg:#0f0f0f;--sb-border:#222;--hint-bg:#080e1a;--hint-color:#8899bb;
+  --wh-bg:#080e1a;--wh-border:#1a2a3a;--wh-inp:#030810;
+  --tab-bg:#1a1a1a;--tab-color:#888;--tab-on-bg:#BBDF32;--tab-on-color:#111;
+  --own-bg:#1a0a30;--own-color:#cc88ff;--own-border:#3a1a60;
+  --sbar-ok-bg:#0a2a08;--sbar-ok-color:#BBDF32;
+  --sbar-bad-bg:#2a0808;--sbar-bad-color:#ff8888;
+  --sbar-warn-bg:#1a1200;--sbar-warn-color:#ffcc44;
+  --hist-bg:#0f0f0f;--hist-border:#1e1e1e;
+}
+body.dark .sc-lbl.s{background:#0d1a2a;color:#5ba8ff}
+body.dark .sc-lbl.a{background:#0a1a0a;color:#66cc44}
+body.dark .sc-lbl.x{background:#1a0f00;color:#ffaa33}
+body.dark .sc-lbl.f{background:#110a1a;color:#cc88ff}
+body.dark .sc-lbl.l{background:#041504;color:#BBDF32}
+body.dark .sc-lbl.e{background:#0a0a0a;color:#555}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0a0a0a;color:#f0f0f0;font-size:14px;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:14px;padding:0;transition:background .2s,color .2s}
 .app{max-width:600px;margin:0 auto;padding:10px}
 /* header */
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#111;border-radius:14px;margin-bottom:10px;border:1px solid #222}
-.hdr-title{font-size:18px;font-weight:800;color:#BBDF32}
-.hdr-sub{font-size:11px;color:#666;margin-top:1px}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--card);border-radius:14px;margin-bottom:10px;border:1px solid var(--border)}
+.hdr-title{font-size:18px;font-weight:800;color:var(--g)}
+.hdr-sub{font-size:11px;color:var(--mu);margin-top:1px}
 /* tabs - 4 col grid 2 rows */
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:10px}
-.tab{padding:9px 2px;font-size:11px;font-weight:700;border-radius:10px;background:#1a1a1a;color:#888;border:1px solid #2a2a2a;cursor:pointer;text-align:center;user-select:none}
-.tab.on{background:#BBDF32;color:#111;border-color:#BBDF32}
-.tab.own{background:#1a0a30;color:#cc88ff;border-color:#3a1a60}
+.tab{padding:9px 2px;font-size:11px;font-weight:700;border-radius:10px;background:var(--tab-bg);color:var(--tab-color);border:1px solid var(--border);cursor:pointer;text-align:center;user-select:none}
+.tab.on{background:var(--tab-on-bg);color:var(--tab-on-color);border-color:var(--tab-on-bg)}
+.tab.own{background:var(--own-bg);color:var(--own-color);border-color:var(--own-border)}
 .tab.own.on{background:#5533aa;color:#fff}
 /* sections */
 .sec{display:none}.sec.on{display:block}
 /* card */
-.card{background:#111;border:1px solid #222;border-radius:14px;padding:13px;margin-bottom:8px}
-.card-title{font-size:14px;font-weight:700;color:#ddd;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
 /* inputs */
 label{display:block;font-size:11px;color:#888;margin-bottom:3px}
-input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #2a2a2a;background:#0a0a0a;color:#f0f0f0;font-size:14px;-webkit-appearance:none}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#BBDF32}
+input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:14px;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--g)}
 textarea{min-height:80px;font-size:13px;resize:vertical}
 /* buttons */
-.btn{display:block;width:100%;padding:12px;border-radius:12px;border:0;background:#BBDF32;color:#111;font-size:14px;font-weight:800;cursor:pointer;margin-top:6px;text-align:center}
+.btn{display:block;width:100%;padding:12px;border-radius:12px;border:0;background:var(--g);color:var(--bg);font-size:14px;font-weight:800;cursor:pointer;margin-top:6px;text-align:center}
 .btn:active{opacity:.85}
-.btn-sec{background:#1e1e1e;color:#ddd;border:1px solid #333}
-.btn-red{background:#1e0808;color:#ff6b6b;border:1px solid #3a1010}
-.btn-pu{background:#1e0a3a;color:#cc88ff;border:1px solid #3a1a60}
+.btn-sec{background:var(--tab-bg);color:var(--text2);border:1px solid var(--border)}
+.btn-red{background:var(--redbg);color:var(--red);border:1px solid var(--red)}
+.btn-pu{background:var(--own-bg);color:var(--own-color);border:1px solid var(--own-border)}
 .btn-sm{padding:7px 12px;font-size:12px;width:auto;display:inline-block;margin:0}
 .btn-gr{background:#063a1a;color:#55cc88;border:1px solid #0a6030}
 /* grid */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 /* pill */
-.pill{background:#0f0f0f;border:1px solid #222;border-radius:12px;padding:10px 14px;margin-top:8px}
-.pill-num{font-size:22px;font-weight:900;color:#BBDF32}
+.pill{background:var(--pill-bg);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-top:8px}
+.pill-num{font-size:22px;font-weight:900;color:var(--g)}
 .pill-lbl{font-size:11px;color:#666}
 /* money row */
 .mrow{display:grid;grid-template-columns:55px 1fr 85px;gap:6px;align-items:center;margin-bottom:6px}
-.mval{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;padding:6px 8px;font-size:12px;color:#BBDF32;text-align:right}
+.mval{background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:12px;color:var(--g);text-align:right}
 /* stock card */
-.sc{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;padding:11px;margin-bottom:6px}
-.sc.bad{background:#1a0505;border-color:#4a1010}
+.sc{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:11px;margin-bottom:6px}
+.sc.bad{background:var(--redbg);border-color:var(--red)}
 .sc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
-.sc-name{font-size:14px;font-weight:700;color:#eee}
+.sc-name{font-size:14px;font-weight:700;color:var(--text)}
 .sc-price{font-size:12px;color:#666;background:#1a1a1a;padding:2px 9px;border-radius:20px}
 .sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .sc-field{display:flex;flex-direction:column;gap:3px}
 .sc-lbl{font-size:10px;font-weight:800;text-align:center;padding:3px 0;border-radius:6px}
-.sc-lbl.s{background:#0d1a2a;color:#5ba8ff}
-.sc-lbl.a{background:#0a1a0a;color:#66cc44}
-.sc-lbl.x{background:#1a0f00;color:#ffaa33}
-.sc-lbl.f{background:#110a1a;color:#cc88ff}
-.sc-lbl.l{background:#041504;color:#BBDF32}
-.sc-lbl.e{background:#0a0a0a;color:#555}
-.sc-field input{text-align:center;font-size:15px;font-weight:700;padding:9px 4px;border-radius:9px;border:1px solid #222;background:#050505;color:#f0f0f0}
-.exp-box{display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid #222;background:#050505;font-size:15px;font-weight:700;color:#555}
-.cat-hdr{background:#0a1500;border:1px solid #1a3a08;border-radius:10px;padding:8px 12px;margin:12px 0 6px;font-weight:800;font-size:13px;color:#BBDF32}
-.svc-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;padding:11px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.svc-name{font-size:14px;font-weight:700;color:#eee;flex:1}
-.svc-price{font-size:12px;color:#666;white-space:nowrap}
+.sc-lbl.s{background:#dceeff;color:#1a5a99}
+.sc-lbl.a{background:#d8f5d0;color:#226622}
+.sc-lbl.x{background:#fff0d0;color:#885500}
+.sc-lbl.f{background:#f0e0ff;color:#6622aa}
+.sc-lbl.l{background:#e8f5c0;color:#446600}
+.sc-lbl.e{background:#e8e8e8;color:#666}
+.sc-field input{text-align:center;font-size:15px;font-weight:700;padding:9px 4px;border-radius:9px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
+.exp-box{display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid var(--border);background:var(--sb-bg);font-size:15px;font-weight:700;color:var(--text2)}
+.cat-hdr{background:var(--gbg);border:1px solid var(--g);border-radius:10px;padding:8px 12px;margin:12px 0 6px;font-weight:800;font-size:13px;color:var(--g)}
+.svc-card{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:11px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.svc-name{font-size:14px;font-weight:700;color:var(--text);flex:1}
+.svc-price{font-size:12px;color:var(--mu);white-space:nowrap}
 .svc-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.svc-input{width:70px;text-align:center;font-size:18px;font-weight:900;padding:9px 4px;border-radius:9px;border:1px solid #2a2a2a;background:#050505;color:#f0f0f0}
-.svc-total{font-size:15px;font-weight:800;color:#BBDF32;min-width:70px;text-align:right}
-.svc-cat-hdr{background:#0a0f1a;border:1px solid #1a2a3a;border-radius:10px;padding:8px 12px;margin:12px 0 6px;font-weight:800;font-size:13px;color:#5ba8ff}
-.wh-row{display:flex;justify-content:space-between;align-items:center;background:#080e1a;border:1px solid #1a2a3a;border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:8px}
+.svc-input{width:70px;text-align:center;font-size:18px;font-weight:900;padding:9px 4px;border-radius:9px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
+.svc-total{font-size:15px;font-weight:800;color:var(--g);min-width:70px;text-align:right}
+.svc-cat-hdr{background:var(--hint-bg);border:1px solid var(--wh-border);border-radius:10px;padding:8px 12px;margin:12px 0 6px;font-weight:800;font-size:13px;color:var(--bl)}
+.wh-row{display:flex;justify-content:space-between;align-items:center;background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:8px}
 .wh-lbl{font-size:11px;font-weight:800;color:#5ba8ff}
 .wh-sub{font-size:10px;color:#444;margin-top:1px}
-.wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid #1a2a3a;background:#030810;color:#5ba8ff}
+.wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid var(--wh-border);background:var(--wh-inp);color:var(--bl)}
 .wh-inp:focus{outline:none;border-color:#5ba8ff}
 .wh-rem{font-size:15px;font-weight:900;padding:5px 10px;border-radius:8px;min-width:60px;text-align:center}
 .wh-ok{color:#BBDF32;background:#041504;border:1px solid #1a4010}
-.wh-unit{font-size:10px;color:#5ba8ff;background:#080e1a;border:1px solid #1a2a3a;border-radius:6px;padding:2px 6px;white-space:nowrap}
+.wh-unit{font-size:10px;color:var(--bl);background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:6px;padding:2px 6px;white-space:nowrap}
 .wh-bottles{font-size:10px;color:#666;margin-top:2px}
 .wh-warn{color:#ffaa33;background:#120f00;border:1px solid #4a3a00}
 .wh-crit{color:#ff6b6b;background:#120505;border:1px solid #4a1010}
-.wh-row{display:flex;justify-content:space-between;align-items:center;background:#080e1a;border:1px solid #1a2a3a;border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:8px}
+.wh-row{display:flex;justify-content:space-between;align-items:center;background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:8px}
 .wh-lbl{font-size:11px;font-weight:800;color:#5ba8ff}
 .wh-sub{font-size:10px;color:#444;margin-top:1px}
-.wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid #1a2a3a;background:#030810;color:#5ba8ff}
+.wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid var(--wh-border);background:var(--wh-inp);color:var(--bl)}
 .wh-inp:focus{outline:none;border-color:#5ba8ff}
 .wh-rem{font-size:15px;font-weight:900;padding:5px 10px;border-radius:8px;min-width:60px;text-align:center}
 .wh-ok{color:#BBDF32;background:#041504;border:1px solid #1a4010}
-.wh-unit{font-size:10px;color:#5ba8ff;background:#080e1a;border:1px solid #1a2a3a;border-radius:6px;padding:2px 6px;white-space:nowrap}
+.wh-unit{font-size:10px;color:var(--bl);background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:6px;padding:2px 6px;white-space:nowrap}
 .wh-bottles{font-size:10px;color:#666;margin-top:2px}
 .wh-warn{color:#ffaa33;background:#120f00;border:1px solid #4a3a00}
 .wh-crit{color:#ff6b6b;background:#120505;border:1px solid #4a1010}
 /* sale row */
-.sale-row{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:12px;padding:11px;margin-bottom:7px}
+.sale-row{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:11px;margin-bottom:7px}
 /* transfer row */
-.tr-row{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:10px;padding:10px;margin-bottom:6px}
+.tr-row{background:var(--input-bg);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:6px}
 /* summary box */
-.sb{background:#0f0f0f;border:1px solid #222;border-radius:12px;padding:10px}
-.sb.ok{border-color:#BBDF32;background:#041504}
-.sb.warn{border-color:#ffaa33;background:#120f00}
-.sb.bad{border-color:#ff5b5b;background:#120505}
-.sb-lbl{font-size:11px;color:#666}
-.sb-val{font-size:20px;font-weight:900;color:#eee;margin-top:2px}
+.sb{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:10px}
+.sb.ok{border-color:var(--g);background:var(--gbg)}
+.sb.warn{border-color:var(--or);background:var(--orbg)}
+.sb.bad{border-color:var(--red);background:var(--redbg)}
+.sb-lbl{font-size:11px;color:var(--mu)}
+.sb-val{font-size:20px;font-weight:900;color:var(--text);margin-top:2px}
 /* status bar */
 .sbar{border-radius:12px;padding:12px;font-weight:800;text-align:center;font-size:14px;margin-top:8px}
-.sbar.ok{background:#0a2a08;color:#BBDF32}
-.sbar.bad{background:#2a0808;color:#ff8888}
-.sbar.warn{background:#1a1200;color:#ffcc44}
+.sbar.ok{background:var(--sbar-ok-bg);color:var(--sbar-ok-color)}
+.sbar.bad{background:var(--sbar-bad-bg);color:var(--sbar-bad-color)}
+.sbar.warn{background:var(--sbar-warn-bg);color:var(--sbar-warn-color)}
 /* history */
-.hist{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;padding:12px;margin-bottom:7px;cursor:pointer}
+.hist{background:var(--hist-bg);border:1px solid var(--hist-border);border-radius:12px;padding:12px;margin-bottom:7px;cursor:pointer}
 .hist-det{display:none;background:#080808;border:1px solid #222;border-radius:10px;padding:12px;margin:-4px 0 8px}
 .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:700;margin:2px}
 .b-ok{background:#0a2a08;color:#66dd44}
@@ -118,23 +152,27 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 .b-warn{background:#2a1800;color:#ffaa44}
 /* owner report tabs */
 .rtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
-.rtab{padding:7px 12px;font-size:12px;font-weight:700;border-radius:9px;background:#1a1a1a;color:#888;border:1px solid #2a2a2a;cursor:pointer}
-.rtab.on{background:#0d3060;color:#5ba8ff;border-color:#1a5090}
+.rtab{padding:7px 12px;font-size:12px;font-weight:700;border-radius:9px;background:var(--tab-bg);color:var(--tab-color);border:1px solid var(--border);cursor:pointer}
+.rtab.on{background:var(--hint-bg);color:var(--bl);border-color:var(--bl)}
 .rep{display:none}.rep.on{display:block}
 /* pin overlay */
-.pov{position:fixed;inset:0;background:#050505;z-index:999;display:flex;align-items:center;justify-content:center}
-.pbox{background:#111;border:1px solid #333;border-radius:20px;padding:28px 22px;width:280px;text-align:center}
+.pov{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center}
+.pbox{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 22px;width:280px;text-align:center}
 .pdots{display:flex;justify-content:center;gap:12px;margin:16px 0}
 .pdot{width:14px;height:14px;border-radius:50%;background:#222;transition:.15s}
 .pdot.on{background:#cc88ff}
 .ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
-.pkey{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:15px;font-size:19px;font-weight:800;cursor:pointer;color:#f0f0f0;width:100%;margin:0}
+.pkey{background:var(--tab-bg);border:1px solid var(--border);border-radius:12px;padding:15px;font-size:19px;font-weight:800;cursor:pointer;color:var(--text);width:100%;margin:0}
 .pkey:active{background:#2a2a2a}
 /* confirm overlay */
 .cov{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:998;display:flex;align-items:center;justify-content:center}
-.cbox{background:#111;border:1px solid #333;border-radius:16px;padding:22px 18px;width:260px;text-align:center}
+.cbox{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 18px;width:260px;text-align:center}
+/* stock sub-tabs */
+.stab-row{display:flex;gap:5px;margin-bottom:8px}
+.stab{flex:1;padding:8px;font-size:12px;font-weight:700;border-radius:10px;background:var(--tab-bg);color:var(--tab-color);border:1px solid var(--border);cursor:pointer;text-align:center}
+.stab.on{background:var(--bl);color:#fff;border-color:var(--bl)}
 /* info hint */
-.hint{background:#0a0f1a;border:1px solid #1a2a3a;border-radius:10px;padding:9px 12px;font-size:12px;color:#5599bb;margin-bottom:10px;line-height:1.6}
+.hint{background:var(--hint-bg);border:1px solid var(--wh-border);border-radius:10px;padding:9px 12px;font-size:12px;color:var(--hint-color);margin-bottom:10px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -145,7 +183,10 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
     <div class="hdr-title">Lucky Gym</div>
     <div class="hdr-sub">บันทึกกะ + สต๊อก + รายงาน</div>
   </div>
-  <button class="btn btn-pu btn-sm" onclick="openOwner()" style="margin:0">👑 เจ้าของ</button>
+  <div style="display:flex;gap:6px;align-items:center">
+    <button id="themeBtn" onclick="toggleTheme()" style="background:none;border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer;font-size:16px;color:var(--text);margin:0">🌙</button>
+    <button class="btn btn-pu btn-sm" onclick="openOwner()" style="margin:0">👑 เจ้าของ</button>
+  </div>
 </div>
 
 <div class="card" style="padding:10px 13px">
@@ -162,7 +203,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
     </div>
     <div>
       <label>เงินในลิ้นชัก target (฿)</label>
-      <input id="iShiftFloat" type="number" inputmode="numeric" value="1500" oninput="calc();saveDraft()" style="font-weight:700;text-align:center"/>
+      <input id="iShiftFloat" type="number" inputmode="numeric" value="3000" oninput="calc();saveDraft()" style="font-weight:700;text-align:center"/>
     </div>
   </div>
 </div>
@@ -187,7 +228,12 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
       </div>
     </div>
     <div style="font-size:11px;color:#555;margin-bottom:8px">🔵เริ่ม + 🟢เติม − 🟠ขาย − 🟣ฟรี = คาดว่าเหลือ</div>
-    <div id="stockList"></div>
+    <div class="stab-row">
+      <div class="stab on" id="stab-fridge" onclick="switchStockTab('fridge',this)">🧊 ตู้เย็น</div>
+      <div class="stab" id="stab-counter" onclick="switchStockTab('counter',this)">🛒 หน้าเคาน์เตอร์</div>
+    </div>
+    <div id="stockList-fridge"></div>
+    <div id="stockList-counter" style="display:none"></div>
     <div class="pill"><div class="pill-lbl">ยอดขายสินค้า</div><div class="pill-num" id="pStockSales">฿0</div></div>
     <div style="margin-top:16px;margin-bottom:4px;font-size:11px;color:#555;border-top:1px solid #1a1a1a;padding-top:12px">ค่าบริการ/สมาชิก — กรอกจำนวน ระบบคำนวณยอดให้ (ไม่ตัดสต๊อก)</div>
     <div id="serviceList"></div>
@@ -211,9 +257,9 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 <!-- OPEN -->
 <div id="tOpen" class="sec">
   <div class="card">
-    <div class="card-title">🔓 เงินทอนเปิดกะ</div>
+    <div class="card-title">🔓 เงินในลิ้นชักต้นกะ</div>
     <div id="openCash"></div>
-    <div class="pill"><div class="pill-lbl">รวมเปิดกะ</div><div class="pill-num" id="pOpen">฿0</div></div>
+    <div class="pill"><div class="pill-lbl">รวมต้นกะ</div><div class="pill-num" id="pOpen">฿0</div></div>
   </div>
 </div>
 
@@ -273,10 +319,10 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 <!-- CLOSE -->
 <div id="tClose" class="sec">
   <div class="card">
-    <div class="card-title">🔒 ปิดกะ — นับเงินในลิ้นชักทั้งหมด</div>
-    <div style="font-size:11px;color:#555;margin-bottom:10px">นับธนบัตรทั้งหมดที่มีในลิ้นชักตอนนี้ (ก่อนแยกใส่ถุง)</div>
+    <div class="card-title">🔒 ปิดกะ — เงินในลิ้นชักท้ายกะ</div>
+    <div style="font-size:11px;color:#555;margin-bottom:10px">นับธนบัตรทั้งหมดที่มีในลิ้นชักตอนสิ้นกะ</div>
     <div id="closeCash"></div>
-    <div class="pill"><div class="pill-lbl">รวมเงินในลิ้นชัก (ทั้งหมด)</div><div class="pill-num" id="pClose">฿0</div></div>
+    <div class="pill"><div class="pill-lbl">รวมเงินในลิ้นชักท้ายกะ</div><div class="pill-num" id="pClose">฿0</div></div>
   </div>
 </div>
 
@@ -291,10 +337,10 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
       <div class="sb"><div class="sb-lbl">โอนรับจริง</div><div class="sb-val" id="sTransfer">฿0</div></div>
       <div class="sb"><div class="sb-lbl">POS รวม</div><div class="sb-val" id="sPOS">฿0</div></div>
       <div class="sb"><div class="sb-lbl">รายจ่าย</div><div class="sb-val" id="sExp">฿0</div></div>
-      <div class="sb"><div class="sb-lbl">เปิดกะ</div><div class="sb-val" id="sOpen">฿0</div></div>
-      <div class="sb ok"><div class="sb-lbl">เงินปิดกะ (คำนวณ)</div><div class="sb-val" id="sExpected">฿0</div></div>
-      <div class="sb" style="color:#5ba8ff"><div class="sb-lbl">เงินในลิ้นชัก (นับจริง)</div><div class="sb-val" id="sClose" style="color:#5ba8ff">฿0</div></div>
-      <div class="sb" id="sbCD"><div class="sb-lbl">ผลต่างลิ้นชัก</div><div class="sb-val" id="sDiff">฿0</div></div>
+      <div class="sb"><div class="sb-lbl">เงินในลิ้นชักต้นกะ</div><div class="sb-val" id="sOpen">฿0</div></div>
+      <div class="sb ok"><div class="sb-lbl">เงินปิดกะ (คำนวณ = ต้นกะ+ขาย−จ่าย)</div><div class="sb-val" id="sExpected">฿0</div></div>
+      <div class="sb" style="color:#5ba8ff"><div class="sb-lbl">เงินปิดกะ (รับจริง)</div><div class="sb-val" id="sClose" style="color:#5ba8ff">฿0</div></div>
+
       <div class="sb" id="sbPD"><div class="sb-lbl">ผลต่าง POS</div><div class="sb-val" id="sPosDiff">฿0</div></div>
       <div class="sb" id="sbSD"><div class="sb-lbl">สินค้า vs POS</div><div class="sb-val" id="sStockDiff">฿0</div></div>
       <div class="sb ok" id="sbBag" style="grid-column:span 2"><div class="sb-lbl" id="sBagLbl">💰 เงินสดใส่ถุง</div><div class="sb-val" id="sBag" style="color:#BBDF32">฿0</div></div>
@@ -452,6 +498,9 @@ function init(){
   try{records=JSON.parse(localStorage.getItem('lucky_records')||'[]');}catch(e){records=[];}
   ownerPin=localStorage.getItem('lucky_pin')||'1234';
   document.getElementById('iDate').valueAsDate=new Date();
+  // theme init
+  const savedTheme=localStorage.getItem('lucky_theme')||'light';
+  if(savedTheme==='dark'){document.body.classList.add('dark');const b=document.getElementById('themeBtn');if(b)b.innerText='☀️';}
   makeMoney('openCash','o');
   makeMoney('closeCash','c');
   makeMoney('drawerCash','d');
@@ -473,6 +522,13 @@ function toggleDrawerNote(){
   const cb=document.getElementById('drawerNote');
   const box=document.getElementById('drawerNoteBox');
   if(box)box.style.display=cb?.checked?'block':'none';
+}
+
+function toggleTheme(){
+  const isDark=document.body.classList.toggle('dark');
+  localStorage.setItem('lucky_theme',isDark?'dark':'light');
+  const b=document.getElementById('themeBtn');
+  if(b)b.innerText=isDark?'☀️':'🌙';
 }
 
 function onShiftChange(){
@@ -515,31 +571,46 @@ function totalMoney(pre){
 }
 
 // ── Stock ──
+const FRIDGE_ITEMS=["น้ำเปล่า เล็ก", "น้ำเปล่า ใหญ่", "น้ำแร่ เล็ก", "น้ำแร่ ใหญ่", "เกลือแร่ยันฮี", "เกเตอเรด ฟ้า", "เกเตอเรด เหลือง", "เกเตอเรด องุ่น", "เกเตอเรด สตรอ", "โค้ก zero", "โค้ก original", "ชเวป", "ชเวป zero", "แฟนต้า แดง", "แฟนต้า ส้ม", "แฟนต้า เขียว", "ยันฮี", "มินิทเมด", "ลิปตัน", "นมไฮโปรตีน", "อกไก่ปั่น LF", "อกไก่ปั่น max", "โทฟูซัง", "Benefitt", "น้ำมะพร้าว", "โอ๊ตผลไม้"];
+
+function switchStockTab(tab,el){
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+  if(el)el.classList.add('on');
+  $('stockList-fridge').style.display=tab==='fridge'?'block':'none';
+  $('stockList-counter').style.display=tab==='counter'?'block':'none';
+}
+
 function buildStock(){
-  const box=$('stockList');if(!box)return;
+  const fridgeBox=$('stockList-fridge');
+  const counterBox=$('stockList-counter');
+  if(!fridgeBox||!counterBox)return;
+  const FRIDGE=["น้ำเปล่า เล็ก", "น้ำเปล่า ใหญ่", "น้ำแร่ เล็ก", "น้ำแร่ ใหญ่", "เกลือแร่ยันฮี", "เกเตอเรด ฟ้า", "เกเตอเรด เหลือง", "เกเตอเรด องุ่น", "เกเตอเรด สตรอ", "โค้ก zero", "โค้ก original", "ชเวป", "ชเวป zero", "แฟนต้า แดง", "แฟนต้า ส้ม", "แฟนต้า เขียว", "ยันฮี", "มินิทเมด", "ลิปตัน", "นมไฮโปรตีน", "อกไก่ปั่น LF", "อกไก่ปั่น max", "โทฟูซัง", "Benefitt", "น้ำมะพร้าว", "โอ๊ตผลไม้"];
+  let htmlF='',htmlC='';
+
   const cats=[...new Set(products.map(p=>p.cat))];
-  let html='';
   cats.forEach(cat=>{
-    html+=`<div class="cat-hdr">${cat}</div>`;
+    let catHtmlF='',catHtmlC='';
     products.forEach((p,i)=>{
       if(p.cat!==cat)return;
       const whv=Number(warehouse[i])||0;
-      html+=`<div class="sc" id="sr${i}">
+      const isFridge=FRIDGE.includes(p.name);
+      const unitLabel=UNIT_MAP[p.name]?`<span class="wh-unit">1 ${UNIT_MAP[p.name].unit} = ${UNIT_MAP[p.name].size} ${p.name.includes('โค้ก')||p.name.includes('เวป')||p.name.includes('แฟนต้า')?'กระป๋อง':'ขวด'}</span>`:'';
+      const sc=`<div class="sc" id="sr${i}">
         <div class="sc-hdr"><span class="sc-name">${p.name}</span><span class="sc-price">฿${p.price}</span></div>
         <div class="wh-row">
           <div>
             <div class="wh-lbl">🏭 คลัง A (หลังบ้าน)</div>
-            <div style="margin-top:3px">${UNIT_MAP[p.name]?`<span class="wh-unit">1 ${UNIT_MAP[p.name].unit} = ${UNIT_MAP[p.name].size} ${p.name.includes('โค้ก')||p.name.includes('เวป')||p.name.includes('แฟนต้า')?'กระป๋อง':'ขวด'}</span>`:''}</div>
+            <div style="margin-top:3px">${unitLabel}</div>
             <div class="wh-bottles" id="whb${i}"></div>
           </div>
           <div style="display:flex;align-items:center;gap:8px">
             <div style="text-align:center">
-              <div style="font-size:10px;color:#444;margin-bottom:2px">${UNIT_MAP[p.name]?UNIT_MAP[p.name].unit:'คงเหลือ'}</div>
+              <div style="font-size:10px;color:var(--mu);margin-bottom:2px">${UNIT_MAP[p.name]?UNIT_MAP[p.name].unit:'คงเหลือ'}</div>
               <input class="wh-inp" id="whi${i}" type="number" inputmode="numeric" value="${whv||''}" placeholder="0"
                 oninput="warehouse[${i}]=Number(this.value)||0;saveWarehouse();updateWh(${i})">
             </div>
             <div style="text-align:center">
-              <div style="font-size:10px;color:#444;margin-bottom:2px">หลังเติม</div>
+              <div style="font-size:10px;color:var(--mu);margin-bottom:2px">หลังเติม</div>
               <div class="wh-rem wh-ok" id="whr${i}">${whv}</div>
             </div>
           </div>
@@ -553,9 +624,14 @@ function buildStock(){
           <div class="sc-field"><div class="sc-lbl e">คาดว่าเหลือ</div><div class="exp-box" id="ex${i}">-</div></div>
         </div>
       </div>`;
+      if(isFridge)catHtmlF+=sc; else catHtmlC+=sc;
     });
+    if(catHtmlF)htmlF+=`<div class="cat-hdr">${cat}</div>`+catHtmlF;
+    if(catHtmlC)htmlC+=`<div class="cat-hdr">${cat}</div>`+catHtmlC;
   });
-  box.innerHTML=html;
+
+  fridgeBox.innerHTML=htmlF;
+  counterBox.innerHTML=htmlC;
 }
 
 function buildServices(){
@@ -818,23 +894,29 @@ function updateWh(i){
   const unit=UNIT_MAP[p?.name];
   const whVal=Number(document.getElementById('whi'+i)?.value)||Number(warehouse[i])||0;
   const add=Number(document.getElementById('ad'+i)?.value)||0;
-  // ถ้ามี unit: คลัง A เป็น "แพค/ถาด", add เป็นขวด → แปลง add เป็นหน่วยใหญ่
-  let rem;
   if(unit){
-    const addInUnits=add/unit.size; // ขวดที่เติม ÷ ขวดต่อแพค
-    rem=whVal-addInUnits;
-    // แสดงผล
-    el.innerText=rem.toFixed(2)+' '+unit.unit;
-    // แสดงจำนวนขวดเทียบเท่า
+    // แปลง add (ชิ้น) เป็นหน่วยใหญ่
+    const totalPieces=Math.round(whVal*unit.size)-add;
+    const bigUnits=Math.floor(totalPieces/unit.size);
+    const remainder=totalPieces%unit.size;
+    // แสดงผลแบบ "X แพ็ค +Y ขวด"
+    let display='';
+    if(bigUnits>0&&remainder>0) display=`${bigUnits} ${unit.unit} +${remainder} ชิ้น`;
+    else if(bigUnits>0) display=`${bigUnits} ${unit.unit}`;
+    else if(remainder>0) display=`${remainder} ชิ้น`;
+    else display='0';
+    el.innerText=display;
     const bEl=document.getElementById('whb'+i);
-    if(bEl)bEl.innerText=whVal>0?`(~${Math.round(whVal*unit.size)} ชิ้น เหลือ ~${Math.round(rem*unit.size)} ชิ้น)`:'';
+    if(bEl)bEl.innerText=whVal>0?`(รวม ${totalPieces} ชิ้น)`:'';
+    const rem=totalPieces/unit.size; // สำหรับเช็ค threshold
+    el.className='wh-rem '+(rem<=0?'wh-crit':rem<=3?'wh-warn':'wh-ok');
   }else{
-    rem=whVal-add;
+    const rem=whVal-add;
     el.innerText=rem;
     const bEl=document.getElementById('whb'+i);
     if(bEl)bEl.innerText='';
+    el.className='wh-rem '+(rem<=0?'wh-crit':rem<=3?'wh-warn':'wh-ok');
   }
-  el.className='wh-rem '+(rem<=0?'wh-crit':rem<=3?'wh-warn':'wh-ok');
 }
 function onImgSelect(e){
   [...e.target.files].forEach(f=>imgFiles.push({file:f,url:URL.createObjectURL(f)}));
@@ -912,7 +994,7 @@ function calc(){
   const stockDiff=st.sales-posGrand;
 
   const shiftType=document.getElementById('iShift')?.value||'เช้า';
-  const shiftFloat=Number(document.getElementById('iShiftFloat')?.value)||1500;
+  const shiftFloat=Number(document.getElementById('iShiftFloat')?.value)||3000;
   // สูตรใหม่:
   // เงินปิดกะ (คำนวณ) = เปิดกะ + สดรับ - รายจ่าย
   // ลิ้นชัก = นับธนบัตรจริงในหน้าปิดกะ
@@ -936,7 +1018,6 @@ function calc(){
   // อัปเดตหน้าปิดกะ
   const so=(id,v)=>{const e=$(id);if(e)e.innerText=money(v);};
   so('cOpen',open);so('cSales',salesTotal+st.sales);so('cExp',expense);so('cClose',closedCalc);
-  set('sDiff',drawerDiff);     // ผลต่างลิ้นชัก vs target
   set('sPosDiff',posDiff);set('sStockDiff',stockDiff);
   set('sBag',bag);
   // อัปเดต drawer target label
@@ -965,7 +1046,6 @@ function calc(){
   }
 
   const sb=(id,cls)=>{const e=$(id);if(e)e.className='sb '+cls;};
-  sb('sbCD',drawerDiff===0?'ok':drawerDiff>0?'warn':'bad');
   sb('sbPD',posDiff===0?'ok':'bad');
   sb('sbSD',stockDiff===0?'ok':'bad');
 
@@ -1032,7 +1112,32 @@ function loadPrev(){
   if(!Object.keys(snap).length&&!prevClose){alert('ยังไม่มีข้อมูลกะก่อนหน้า');return;}
   askAction('โหลดข้อมูลจากกะก่อน?','โหลดยอดสต๊อก + ตั้งเงินเปิดกะจากยอดปิดกะก่อน',()=>{
     // โหลดสต๊อก
-    products.forEach((p,i)=>{const e=$('st'+i);if(e)e.value=snap[i]||'';});
+    // โหลดสต๊อก — ล็อคช่องที่มีหมายเหตุไม่ตรง
+    const mismatchLog=JSON.parse(localStorage.getItem('lucky_stock_mismatch')||'{}');
+    products.forEach((p,i)=>{
+      const e=$('st'+i);
+      if(!e)return;
+      e.value=snap[i]||'';
+      if(mismatchLog[i]){
+        // มี mismatch จากกะก่อน — ล็อคแก้ไม่ได้ แสดงหมายเหตุ
+        e.style.borderColor='#ffaa33';
+        e.title=`กะก่อน: บันทึก ${mismatchLog[i].recorded} นับจริง ${mismatchLog[i].actual} (ต่าง ${mismatchLog[i].diff})`;
+        e.readOnly=true;
+        // แสดง badge เตือน
+        const row=document.getElementById('sr'+i);
+        if(row){
+          const note=document.createElement('div');
+          note.style.cssText='font-size:11px;color:#ffaa33;padding:3px 0;margin-top:4px';
+          note.innerText=`⚠️ กะก่อนนับจริงต่างจากบันทึก ${mismatchLog[i].diff>0?'+':''}${mismatchLog[i].diff} ชิ้น`;
+          const existing=row.querySelector('.mismatch-note');
+          if(!existing){note.className='mismatch-note';row.appendChild(note);}
+        }
+      }else{
+        e.style.borderColor='';e.readOnly=false;
+        const row=document.getElementById('sr'+i);
+        if(row){const old=row.querySelector('.mismatch-note');if(old)old.remove();}
+      }
+    });
     // ตั้งเงินเปิดกะ = ปิดกะวันก่อน (แยกธนบัตรตาม snapshot)
     if(prevClose){
       try{
@@ -1040,17 +1145,15 @@ function loadPrev(){
         // กะบ่าย: เปิดกะ = ยอดปิดกะคำนวณของกะเช้า (ส่งต่อทั้งหมด)
         // กะเช้า: เปิดกะ = ลิ้นชักที่เหลือ (นับธนบัตรจริง)
         if(shiftNow==='บ่าย'){
-          // ใช้ยอดคำนวณ — ใส่ใน o1000 เพื่อให้ง่าย
-          const calcAmt=Number(localStorage.getItem('lucky_prev_close_calc'))||0;
-          BILLS.forEach(b=>{const e=$('o'+b);if(e)e.value='';});
-          // ใส่เป็น 1000+500+100 ที่ใกล้เคียง
-          if(calcAmt>0){
-            let rem=calcAmt;
-            [1000,500,100,50,20,10,5,2,1].forEach(b=>{
-              const cnt=Math.floor(rem/b);
-              const el=$('o'+b);if(el&&cnt>0){el.value=cnt;rem-=cnt*b;}
+          // กะบ่าย: ต้นกะ = เงินลิ้นชักท้ายกะเช้า (close snapshot)
+          try{
+            const closeSnap=JSON.parse(localStorage.getItem('lucky_prev_close')||'{}');
+            BILLS.forEach(b=>{const e=$('o'+b);if(e)e.value='';});
+            Object.entries(closeSnap).forEach(([k,v])=>{
+              const openKey=k.replace(/^c/,'o');
+              const e=$(openKey);if(e)e.value=v;
             });
-          }
+          }catch(e){}
         }else{
           // กะเช้า: ใช้เงินทอน (drawer) ของกะบ่ายวานเป็น open
           try{
