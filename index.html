@@ -37,8 +37,11 @@ body.dark .sc-lbl.s{background:#0d1a2a;color:#5ba8ff}
 body.dark .sc-lbl.a{background:#0a1a0a;color:#66cc44}
 body.dark .sc-lbl.x{background:#1a0f00;color:#ffaa33}
 body.dark .sc-lbl.f{background:#110a1a;color:#cc88ff}
-body.dark .sc-lbl.l{background:#041504;color:#BBDF32}
+body.dark .sc-lbl.l{background:var(--gbg);color:#BBDF32}
 body.dark .sc-lbl.e{background:#0a0a0a;color:#555}
+body.dark .sb.ok{background:#041504}
+body.dark .sb.warn{background:#120f00}
+body.dark .sb.bad{background:#120505}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:14px;padding:0;transition:background .2s,color .2s}
 .app{max-width:600px;margin:0 auto;padding:10px}
@@ -111,31 +114,31 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 .wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid var(--wh-border);background:var(--wh-inp);color:var(--bl)}
 .wh-inp:focus{outline:none;border-color:#5ba8ff}
 .wh-rem{font-size:15px;font-weight:900;padding:5px 10px;border-radius:8px;min-width:60px;text-align:center}
-.wh-ok{color:#BBDF32;background:#041504;border:1px solid #1a4010}
+.wh-ok{color:#BBDF32;background:var(--gbg);border:1px solid var(--g)}
 .wh-unit{font-size:10px;color:var(--bl);background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:6px;padding:2px 6px;white-space:nowrap}
 .wh-bottles{font-size:10px;color:#666;margin-top:2px}
-.wh-warn{color:#ffaa33;background:#120f00;border:1px solid #4a3a00}
-.wh-crit{color:#ff6b6b;background:#120505;border:1px solid #4a1010}
+.wh-warn{color:#ffaa33;background:var(--orbg);border:1px solid var(--or)}
+.wh-crit{color:#ff6b6b;background:var(--redbg);border:1px solid var(--red)}
 .wh-row{display:flex;justify-content:space-between;align-items:center;background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:8px}
 .wh-lbl{font-size:11px;font-weight:800;color:#5ba8ff}
 .wh-sub{font-size:10px;color:#444;margin-top:1px}
 .wh-inp{width:90px;text-align:center;font-size:16px;font-weight:700;padding:7px 4px;border-radius:9px;border:1px solid var(--wh-border);background:var(--wh-inp);color:var(--bl)}
 .wh-inp:focus{outline:none;border-color:#5ba8ff}
 .wh-rem{font-size:15px;font-weight:900;padding:5px 10px;border-radius:8px;min-width:60px;text-align:center}
-.wh-ok{color:#BBDF32;background:#041504;border:1px solid #1a4010}
+.wh-ok{color:#BBDF32;background:var(--gbg);border:1px solid var(--g)}
 .wh-unit{font-size:10px;color:var(--bl);background:var(--wh-bg);border:1px solid var(--wh-border);border-radius:6px;padding:2px 6px;white-space:nowrap}
 .wh-bottles{font-size:10px;color:#666;margin-top:2px}
-.wh-warn{color:#ffaa33;background:#120f00;border:1px solid #4a3a00}
-.wh-crit{color:#ff6b6b;background:#120505;border:1px solid #4a1010}
+.wh-warn{color:#ffaa33;background:var(--orbg);border:1px solid var(--or)}
+.wh-crit{color:#ff6b6b;background:var(--redbg);border:1px solid var(--red)}
 /* sale row */
 .sale-row{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:11px;margin-bottom:7px}
 /* transfer row */
 .tr-row{background:var(--input-bg);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:6px}
 /* summary box */
 .sb{background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:12px;padding:10px}
-.sb.ok{border-color:var(--g);background:var(--gbg)}
-.sb.warn{border-color:var(--or);background:var(--orbg)}
-.sb.bad{border-color:var(--red);background:var(--redbg)}
+.sb.ok{border-color:var(--g);background:var(--gbg);color:var(--text)}
+.sb.warn{border-color:var(--or);background:var(--orbg);color:var(--text)}
+.sb.bad{border-color:var(--red);background:var(--redbg);color:var(--text)}
 .sb-lbl{font-size:11px;color:var(--mu)}
 .sb-val{font-size:20px;font-weight:900;color:var(--text);margin-top:2px}
 /* status bar */
@@ -349,7 +352,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 
     <!-- เงินทอนพรุ่งนี้ (กะบ่ายเท่านั้น) -->
     <div id="drawerSection" style="margin-top:10px;display:none">
-      <div style="background:#080e1a;border:1px solid #1a2a3a;border-radius:14px;padding:14px">
+      <div style="background:var(--hint-bg);border:1px solid var(--wh-border);border-radius:14px;padding:14px">
         <div style="font-size:13px;font-weight:700;color:#5ba8ff;margin-bottom:6px">🗄 เงินทอนพรุ่งนี้ (นับแบงค์ที่จะเหลือไว้)</div>
         <div style="font-size:11px;color:#555;margin-bottom:10px">target ฿<span id="drawerTargetLbl">1,500</span> · กะเช้าข้ามได้</div>
         <div id="drawerCash"></div>
@@ -700,15 +703,15 @@ function stockCalc(){
     if(has){
       if(eb)eb.innerText=exp;
       if(lf!==exp){
-        if(eb)eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid #4a1010;background:#1a0505;font-size:15px;font-weight:700;color:#ff6b6b';
+        if(eb)eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid var(--red);background:#1a0505;font-size:15px;font-weight:700;color:#ff6b6b';
         if(row)row.className='sc bad';
         mm++;det.push({name:p.name,price:p.price,start:st,add:ad,sold:sl,free:fr,left:lf,exp,diff:lf-exp});
       }else{
-        if(eb)eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid #1a4a10;background:#041504;font-size:15px;font-weight:700;color:#BBDF32';
+        if(eb)eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid #1a4a10;background:var(--gbg);font-size:15px;font-weight:700;color:#BBDF32';
         if(row)row.className='sc';
       }
     }else{
-      if(eb){eb.innerText='-';eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid #1a1a1a;background:#050505;font-size:15px;font-weight:700;color:#444'}
+      if(eb){eb.innerText='-';eb.style.cssText='display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1px solid var(--border);background:var(--input-bg);font-size:15px;font-weight:700;color:var(--mu)'}
       if(row)row.className='sc';
     }
     sales+=sl*p.price;
@@ -724,7 +727,7 @@ function addSale(type='',qty=1,price='',note=''){
   const d=document.createElement('div');d.id=id;d.className='sale-row';
   d.innerHTML=`
     <div class="g2" style="margin-bottom:7px">
-      <div><label>ประเภท</label><select class="stype" onchange="onSaleType(this)" style="font-size:13px;padding:8px;border-radius:10px;border:1px solid #2a2a2a;background:#050505;color:#f0f0f0">${opts}</select></div>
+      <div><label>ประเภท</label><select class="stype" onchange="onSaleType(this)" style="font-size:13px;padding:8px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)">${opts}</select></div>
       <div><label>หมายเหตุ/ชื่อ</label><input class="snote" type="text" value="${note}" placeholder="ชื่อ/รายละเอียด" oninput="calcSales();saveSalesDraft()"></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:7px;align-items:end">
@@ -1026,9 +1029,9 @@ function calc(){
   // drawer status
   const ds=document.getElementById('drawerStatus');
   if(ds&&close>0){
-    if(drawerDiff===0){ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:#041504;border:1px solid #1a4010;color:#BBDF32';ds.innerText='✅ ลิ้นชักตรง target ฿'+drawerTarget.toLocaleString('th-TH');}
-    else if(drawerDiff>0){ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:#120f00;border:1px solid #4a3a00;color:#ffcc44';ds.innerText='⚠️ ลิ้นชักเกิน target ฿'+Math.abs(drawerDiff).toLocaleString('th-TH');}
-    else{ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:#120505;border:1px solid #4a1010;color:#ff8888';ds.innerText='❌ ลิ้นชักขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
+    if(drawerDiff===0){ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--gbg);border:1px solid var(--g);color:#BBDF32';ds.innerText='✅ ลิ้นชักตรง target ฿'+drawerTarget.toLocaleString('th-TH');}
+    else if(drawerDiff>0){ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--orbg);border:1px solid var(--or);color:#ffcc44';ds.innerText='⚠️ ลิ้นชักเกิน target ฿'+Math.abs(drawerDiff).toLocaleString('th-TH');}
+    else{ds.style.cssText='margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;text-align:center;background:var(--redbg);border:1px solid var(--red);color:#ff8888';ds.innerText='❌ ลิ้นชักขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
   }
   // อัปเดต label และซ่อน/แสดงตามกะ
   const bagBox=document.getElementById('sbBag');
@@ -1040,9 +1043,9 @@ function calc(){
   const dstat=document.getElementById('drawerStatus');
   if(dstat&&shiftType==='บ่าย'){
     if(drawer===0){dstat.innerText='';dstat.style.cssText='';}
-    else if(drawerDiff===0){dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:#041504;border:1px solid #1a4010;color:#BBDF32';dstat.innerText='✅ เงินทอนตรง target ฿'+drawerTarget.toLocaleString('th-TH');}
-    else if(drawerDiff>0){dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:#120f00;border:1px solid #4a3a00;color:#ffcc44';dstat.innerText='⚠️ เงินทอนเกิน target ฿'+Math.abs(drawerDiff).toLocaleString('th-TH');}
-    else{dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:#120505;border:1px solid #4a1010;color:#ff8888';dstat.innerText='❌ เงินทอนขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
+    else if(drawerDiff===0){dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:var(--gbg);border:1px solid var(--g);color:#BBDF32';dstat.innerText='✅ เงินทอนตรง target ฿'+drawerTarget.toLocaleString('th-TH');}
+    else if(drawerDiff>0){dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:var(--orbg);border:1px solid var(--or);color:#ffcc44';dstat.innerText='⚠️ เงินทอนเกิน target ฿'+Math.abs(drawerDiff).toLocaleString('th-TH');}
+    else{dstat.style.cssText='margin-top:8px;border-radius:10px;padding:9px;font-size:13px;font-weight:700;text-align:center;background:var(--redbg);border:1px solid var(--red);color:#ff8888';dstat.innerText='❌ เงินทอนขาด ฿'+Math.abs(drawerDiff).toLocaleString('th-TH')+' จาก target';}
   }
 
   const sb=(id,cls)=>{const e=$(id);if(e)e.className='sb '+cls;};
@@ -1457,10 +1460,10 @@ function buildToday(){
     <div class="sb"><div class="sb-lbl">รายจ่าย</div><div class="sb-val" style="color:#ff8888">${money(d.expense||0)}</div></div>
     <div class="sb ok" style="grid-column:span 2"><div class="sb-lbl">💰 เงินสดใส่ถุง</div><div class="sb-val" style="color:#BBDF32">${money(d.bag||0)}</div></div>
   </div>`;
-  if(d.expenseNote)h+=`<div style="background:#0a0a0a;border:1px solid #1e1e1e;border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:13px;color:#aaa">📝 ${d.expenseNote}</div>`;
+  if(d.expenseNote)h+=`<div style="background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:13px;color:#aaa">📝 ${d.expenseNote}</div>`;
   h+=checks.map(c=>{
     const ok=c.diff===0;const sm=!ok&&Math.abs(c.diff)<500;
-    return`<div style="display:flex;gap:8px;padding:10px;border-radius:10px;margin-bottom:6px;border:1px solid ${ok?'#1a4010':sm?'#4a3a00':'#4a1010'};background:${ok?'#041504':sm?'#120f00':'#120505'}">
+    return`<div style="display:flex;gap:8px;padding:10px;border-radius:10px;margin-bottom:6px;border:1px solid ${ok?'var(--g)':sm?'var(--or)':'var(--red)'};background:${ok?'var(--gbg)':sm?'var(--orbg)':'var(--redbg)'}">
       <span style="font-size:18px;flex-shrink:0">${ok?'✅':sm?'⚠️':'❌'}</span>
       <div style="flex:1"><div style="font-weight:700;font-size:13px">${c.lb}</div><div style="font-size:12px;color:#888;margin-top:2px">${c.ex}</div></div>
       <div style="text-align:right;flex-shrink:0"><div style="font-size:11px;color:#555">${money(c.a)} / ${money(c.b)}</div><div style="font-weight:800;color:${ok?'#BBDF32':sm?'#ffaa33':'#ff6b6b'}">${ok?'ตรง':money(c.diff)}</div></div>
@@ -1473,7 +1476,7 @@ function buildToday(){
   }
   if(d.stockMismatch>0&&d.stockIssues?.length){
     h+=`<div style="font-weight:700;font-size:13px;color:#ff6b6b;margin:10px 0 6px">❌ สต๊อกไม่ตรง</div>`;
-    h+=d.stockIssues.map(s=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid #1a0808"><span style="color:#ff9999">${s.name}</span><span>เหลือ ${s.left} คาด ${s.exp} <span style="color:#ff6b6b">(${s.diff>0?'+':''}${s.diff})</span></span></div>`).join('');
+    h+=d.stockIssues.map(s=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--redbg)"><span style="color:var(--red)">${s.name}</span><span>เหลือ ${s.left} คาด ${s.exp} <span style="color:#ff6b6b">(${s.diff>0?'+':''}${s.diff})</span></span></div>`).join('');
   }
   return h;
 }
@@ -1595,7 +1598,7 @@ function renderHistDay(date){
       </div>`
     ).join('');
 
-    return`<div style="background:#0a0a0a;border:1px solid #2a2a2a;border-radius:14px;padding:14px;margin-bottom:10px">
+    return`<div style="background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:14px;padding:14px;margin-bottom:10px">
 
       <!-- หัว -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
@@ -1607,7 +1610,7 @@ function renderHistDay(date){
       </div>
 
       <!-- ยอดเงินรวม -->
-      <div style="background:#0f1a0f;border:1px solid #1a4010;border-radius:10px;padding:10px 12px;margin-bottom:10px;text-align:center">
+      <div style="background:var(--gbg);border:1px solid var(--g);border-radius:10px;padding:10px 12px;margin-bottom:10px;text-align:center">
         <div style="font-size:11px;color:#666">รายได้รวมทั้งกะ</div>
         <div style="font-size:26px;font-weight:900;color:#BBDF32">${money((r.appGrand||0)+(r.salesTotal||0))}</div>
       </div>
@@ -1623,12 +1626,12 @@ function renderHistDay(date){
         <div class="sb"><div class="sb-lbl">รายจ่าย</div><div style="font-weight:700;font-size:16px;color:#ff8888">${money(r.expense||0)}</div></div>
         <div class="sb ok" style="grid-column:span 2"><div class="sb-lbl">💰 เงินสดใส่ถุง</div><div style="font-weight:900;font-size:18px;color:#BBDF32">${money(r.bag||0)}</div></div>
       </div>
-      ${r.expenseNote?`<div style="background:#0a0a0a;border:1px solid #1e1e1e;border-radius:8px;padding:7px 10px;font-size:12px;color:#999;margin-bottom:10px">📝 ${r.expenseNote}</div>`:''}
+      ${r.expenseNote?`<div style="background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:8px;padding:7px 10px;font-size:12px;color:var(--mu);margin-bottom:10px">📝 ${r.expenseNote}</div>`:''}
 
       <!-- รายการขาย -->
       ${r.salesData?.length?`
       <div style="font-weight:700;font-size:12px;color:#aaa;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">🛒 รายการขาย (${r.salesData.length} รายการ)</div>
-      <div style="background:#050505;border:1px solid #1e1e1e;border-radius:10px;padding:10px;margin-bottom:10px">
+      <div style="background:var(--sb-bg);border:1px solid var(--sb-border);border-radius:10px;padding:10px;margin-bottom:10px">
         ${salesRows}
         <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-weight:800;font-size:14px">
           <span>รวม</span><span style="color:#BBDF32">${money(r.salesTotal||0)}</span>
@@ -1638,18 +1641,18 @@ function renderHistDay(date){
       <!-- ผลต่าง + วิเคราะห์ -->
       <div style="font-weight:700;font-size:12px;color:#aaa;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">🔍 ผลต่างและสาเหตุ</div>
       ${ok?
-        `<div style="background:#041504;border:1px solid #1a4010;border-radius:10px;padding:10px 12px;font-size:13px;color:#BBDF32;font-weight:700">✅ ยอดตรงทุกส่วน — ไม่มีความผิดปกติ</div>`
+        `<div style="background:var(--gbg);border:1px solid var(--g);border-radius:10px;padding:10px 12px;font-size:13px;color:#BBDF32;font-weight:700">✅ ยอดตรงทุกส่วน — ไม่มีความผิดปกติ</div>`
         :issues.map(iss=>{
           const isOk=iss.diff===0;
           const isSmall=!isOk&&Math.abs(iss.diff)<500;
           return`<div style="display:flex;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:6px;
-            border:1px solid ${isOk?'#1a4010':isSmall?'#4a3a00':'#4a1010'};
-            background:${isOk?'#041504':isSmall?'#120f00':'#120505'}">
+            border:1px solid ${isOk?'var(--g)':isSmall?'var(--or)':'var(--red)'};
+            background:${isOk?'var(--gbg)':isSmall?'var(--orbg)':'var(--redbg)'}">
             <span style="font-size:18px;flex-shrink:0">${isOk?'✅':isSmall?'⚠️':'❌'}</span>
             <div>
               <div style="font-weight:700;font-size:13px;margin-bottom:3px">${iss.label}</div>
               <div style="font-size:12px;color:#aaa">${iss.reason}</div>
-              <div style="font-size:13px;font-weight:800;margin-top:4px;color:${isOk?'#BBDF32':isSmall?'#ffaa33':'#ff6b6b'}">${isOk?'ตรง':money(iss.diff)}</div>
+              <div style="font-size:13px;font-weight:800;margin-top:4px;color:${isOk?'var(--g)':isSmall?'var(--or)':'var(--red)'}">${isOk?'ตรง':money(iss.diff)}</div>
             </div>
           </div>`;
         }).join('')
@@ -1676,11 +1679,11 @@ function buildTgCfg(){
   const thrRows=products.map((p,i)=>`
     <div style="display:grid;grid-template-columns:1fr 80px;gap:8px;align-items:center;margin-bottom:5px">
       <div style="font-size:13px">${p.name} <span style="color:#555;font-size:11px">(def ${SPECIAL_THR[p.name]||DEFAULT_THR})</span></div>
-      <input type="number" id="thr${i}" value="${thrData[p.name]!==undefined?thrData[p.name]:(SPECIAL_THR[p.name]||DEFAULT_THR)}" min="0" inputmode="numeric" style="text-align:center;font-size:14px;font-weight:700;padding:7px;border-radius:9px;border:1px solid #2a2a2a;background:#0a0a0a;color:#f0f0f0">
+      <input type="number" id="thr${i}" value="${thrData[p.name]!==undefined?thrData[p.name]:(SPECIAL_THR[p.name]||DEFAULT_THR)}" min="0" inputmode="numeric" style="text-align:center;font-size:14px;font-weight:700;padding:7px;border-radius:9px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)">
     </div>`).join('');
   return`<div>
     <div style="font-weight:700;font-size:13px;color:#229ED9;margin-bottom:8px">📲 Telegram Bot</div>
-    <div style="background:#080e1a;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;font-size:12px;color:#5599bb;margin-bottom:10px;line-height:1.7">
+    <div style="background:var(--hint-bg);border:1px solid var(--wh-border);border-radius:10px;padding:10px 12px;font-size:12px;color:#5599bb;margin-bottom:10px;line-height:1.7">
       Bot Token และ Chat ID คนแรกฝังไว้แล้ว<br>
       คนที่ 2: เพิ่ม bot → ส่งข้อความ → หา Chat ID แล้วใส่ด้านล่าง
     </div>
