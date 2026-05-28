@@ -536,7 +536,7 @@ function buildStock(){
           <div style="display:flex;align-items:center;gap:8px">
             <div style="text-align:center">
               <div style="font-size:10px;color:var(--mu);margin-bottom:2px">${UNIT_MAP[p.name]?UNIT_MAP[p.name].unit:'คงเหลือ'}</div>
-              <input class="wh-inp" id="whi${i}" type="number" inputmode="numeric" value="${whv||''}" placeholder="0" oninput="warehouse[${i}]=Number(this.value)||0;saveWarehouse();updateWh(${i})">
+              <input class="wh-inp" id="whi${i}" type="number" inputmode="decimal" value="${whv||''}" placeholder="0" oninput="warehouse[${i}]=Number(this.value)||0;saveWarehouse();updateWh(${i})">
             </div>
             <div style="text-align:center">
               <div style="font-size:10px;color:var(--mu);margin-bottom:2px">หลังเติม</div>
@@ -545,11 +545,11 @@ function buildStock(){
           </div>
         </div>
         <div class="sc-grid">
-          <div class="sc-field"><div class="sc-lbl s">🔵 เริ่ม</div><input id="st${i}" type="number" inputmode="numeric" placeholder="0" oninput="calc();saveDraft()"></div>
-          <div class="sc-field"><div class="sc-lbl a">🟢 เติม</div><input id="ad${i}" type="number" inputmode="numeric" placeholder="0" oninput="updateWh(${i});calc();saveDraft()"></div>
-          <div class="sc-field"><div class="sc-lbl x">🟠 ขาย</div><input id="sl${i}" type="number" inputmode="numeric" placeholder="0" oninput="calc();saveDraft()"></div>
-          <div class="sc-field"><div class="sc-lbl f">🟣 ฟรี</div><input id="fr${i}" type="number" inputmode="numeric" placeholder="0" oninput="calc();saveDraft()"></div>
-          <div class="sc-field"><div class="sc-lbl l">🟡 เหลือจริง</div><input id="lf${i}" type="number" inputmode="numeric" placeholder="0" oninput="calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl s">🔵 เริ่ม</div><input id="st${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl a">🟢 เติม</div><input id="ad${i}" type="number" inputmode="numeric" placeholder="0" inputmode="decimal" oninput="updateWh(${i});calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl x">🟠 ขาย</div><input id="sl${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl f">🟣 ฟรี</div><input id="fr${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl l">🟡 เหลือจริง</div><input id="lf${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
           <div class="sc-field"><div class="sc-lbl e">คาดว่าเหลือ</div><div class="exp-box" id="ex${i}">-</div></div>
         </div>
       </div>`;
