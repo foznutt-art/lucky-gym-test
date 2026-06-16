@@ -165,7 +165,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
       </select>
     </div>
     <div><label>เงินในลิ้นชัก target (฿)</label>
-      <input id="iShiftFloat" type="number" inputmode="numeric" value="3000" oninput="calc();saveDraft()" style="font-weight:700;text-align:center"/>
+      <input id="iShiftFloat" type="number" inputmode="decimal" value="3000" oninput="calc();saveDraft()" style="font-weight:700;text-align:center"/>
     </div>
   </div>
 </div>
@@ -221,15 +221,15 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
   <div class="card">
     <div class="card-title">🖥 ยอดจาก POS</div>
     <div class="g3">
-      <div><label>POS เงินสด</label><input id="iPosCash" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
-      <div><label>POS โอน</label><input id="iPosTransfer" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
-      <div><label>POS รวม</label><input id="iPosGrand" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
+      <div><label>POS เงินสด</label><input id="iPosCash" type="number" inputmode="decimal" oninput="calc();saveDraft()" placeholder="0"/></div>
+      <div><label>POS โอน</label><input id="iPosTransfer" type="number" inputmode="decimal" oninput="calc();saveDraft()" placeholder="0"/></div>
+      <div><label>POS รวม</label><input id="iPosGrand" type="number" inputmode="decimal" oninput="calc();saveDraft()" placeholder="0"/></div>
     </div>
   </div>
   <div class="card">
     <div class="card-title">📲 ยอดโอนรับจริง (กรอกเอง)</div>
     <div style="font-size:11px;color:var(--mu);margin-bottom:8px">กรอกยอดรวมที่รับจริงทั้งวัน — แยกจากระบบ SMS ด้านล่าง</div>
-    <div><label>ยอดโอนรับจริง (฿)</label><input id="iTransferManual" type="number" inputmode="numeric" oninput="calc();saveDraft()" placeholder="0"/></div>
+    <div><label>ยอดโอนรับจริง (฿)</label><input id="iTransferManual" type="number" inputmode="decimal" oninput="calc();saveDraft()" placeholder="0"/></div>
   </div>
   <div class="card">
     <div class="card-title">📲 SMS/QR (ตรวจสอบเท่านั้น)
@@ -321,6 +321,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
         <div id="drawerNoteBox" style="display:none;margin-top:6px">
           <input id="drawerNoteText" type="text" placeholder="เช่น มีแต่แบงค์ 1,000 เหลือ 2,000 แทน 3,000" oninput="saveDraft()">
         </div>
+        <div id="drawerNoteRows"></div>
       </div>
     </div>
     <div class="sb ok" id="sbBag" style="display:none;margin-top:8px">
@@ -451,7 +452,7 @@ function makeMoney(cid,pre){
   BILLS.forEach(b=>{
     const r=document.createElement('div');r.className='mrow';
     const extraFn=pre==='o'?'updateOpenRef();':pre==='db'?'updateDrawerBill();':'';
-    r.innerHTML=`<label style="margin:0;font-size:13px">฿${b}</label><input id="${pre}${b}" type="number" inputmode="numeric" min="0" placeholder="0" oninput="calc();saveDraft();${extraFn}"><div class="mval" id="${pre}${b}v">฿0</div>`;
+    r.innerHTML=`<label style="margin:0;font-size:13px">฿${b}</label><input id="${pre}${b}" type="number" inputmode="decimal" min="0" placeholder="0" oninput="calc();saveDraft();${extraFn}"><div class="mval" id="${pre}${b}v">฿0</div>`;
     box.appendChild(r);
   });
 }
@@ -546,7 +547,7 @@ function buildStock(){
         </div>
         <div class="sc-grid">
           <div class="sc-field"><div class="sc-lbl s">🔵 เริ่ม</div><input id="st${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
-          <div class="sc-field"><div class="sc-lbl a">🟢 เติม</div><input id="ad${i}" type="number" inputmode="numeric" placeholder="0" inputmode="decimal" oninput="updateWh(${i});calc();saveDraft()"></div>
+          <div class="sc-field"><div class="sc-lbl a">🟢 เติม</div><input id="ad${i}" type="number" inputmode="decimal" placeholder="0" inputmode="decimal" oninput="updateWh(${i});calc();saveDraft()"></div>
           <div class="sc-field"><div class="sc-lbl x">🟠 ขาย</div><input id="sl${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
           <div class="sc-field"><div class="sc-lbl f">🟣 ฟรี</div><input id="fr${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
           <div class="sc-field"><div class="sc-lbl l">🟡 เหลือจริง</div><input id="lf${i}" type="number" inputmode="decimal" placeholder="0" oninput="calc();saveDraft()"></div>
@@ -601,8 +602,8 @@ function buildServices(){
       html+=`<div class="svc-card">
         <div><div class="svc-name">${s.name}</div><div class="svc-price">${s.price>0?'฿'+s.price+'/คน':'กรอกราคาเอง'}</div></div>
         <div class="svc-right">
-          ${s.price===0?`<input class="svc-input" id="svcp${i}" type="number" inputmode="numeric" value="" placeholder="฿" style="width:80px" oninput="calcServices();saveDraft()">`:'' }
-          <div><div style="font-size:10px;color:var(--mu);text-align:center;margin-bottom:2px">จำนวน</div><input class="svc-input" id="svcn${i}" type="number" inputmode="numeric" placeholder="0" oninput="calcServices();saveDraft()"></div>
+          ${s.price===0?`<input class="svc-input" id="svcp${i}" type="number" inputmode="decimal" value="" placeholder="฿" style="width:80px" oninput="calcServices();saveDraft()">`:'' }
+          <div><div style="font-size:10px;color:var(--mu);text-align:center;margin-bottom:2px">จำนวน</div><input class="svc-input" id="svcn${i}" type="number" inputmode="decimal" placeholder="0" oninput="calcServices();saveDraft()"></div>
           <div class="svc-total" id="svct${i}">฿0</div>
         </div>
       </div>`;
@@ -670,7 +671,7 @@ function addExpense(note='',amount=''){
   const r=document.createElement('div');r.className='tr-row';
   r.innerHTML=`<div style="display:flex;gap:6px;align-items:center">
     <input class="exp-note" type="text" value="${note}" placeholder="รายการ เช่น ค่าน้ำ" style="font-size:13px;flex:1" oninput="calcExpenses();saveExpDraft()">
-    <input class="exp-amount" type="number" inputmode="numeric" value="${amount}" placeholder="฿" style="width:100px;text-align:center;font-size:16px;font-weight:700" oninput="calcExpenses();saveExpDraft()">
+    <input class="exp-amount" type="number" inputmode="decimal" value="${amount}" placeholder="฿" style="width:100px;text-align:center;font-size:16px;font-weight:700" oninput="calcExpenses();saveExpDraft()">
     <button class="btn btn-red" onclick="this.closest('.tr-row').remove();calcExpenses();saveExpDraft()" style="width:38px;height:38px;padding:0;margin:0;font-size:16px;border-radius:9px;flex-shrink:0">×</button>
   </div>`;
   box.appendChild(r);calcExpenses();
@@ -745,7 +746,7 @@ function addTransfer(time='',amount=''){
   const r=document.createElement('div');r.className='tr-row';
   r.innerHTML=`<div class="g2" style="margin-bottom:6px">
     <div><label>เวลา</label><input class="ttime" type="text" value="${time}" placeholder="HH:MM" style="text-align:center;font-size:14px"></div>
-    <div><label>จำนวน (฿)</label><input class="tamount" type="number" inputmode="numeric" value="${amount}" placeholder="0" style="text-align:center;font-size:16px;font-weight:700" oninput="updateSmsTotal()"></div>
+    <div><label>จำนวน (฿)</label><input class="tamount" type="number" inputmode="decimal" value="${amount}" placeholder="0" style="text-align:center;font-size:16px;font-weight:700" oninput="updateSmsTotal()"></div>
   </div>
   <div style="display:flex;gap:6px;align-items:center">
     <input class="tnote" type="text" placeholder="หมายเหตุ/ธนาคาร" style="font-size:13px;flex:1">
@@ -868,6 +869,14 @@ function calc(){
     appGrand:cash+transfer,posDiff:diff1,stockDiff:diff3,diff:diff2,
     salesData:[...svcs,...getServicesData().filter(s=>!SERVICES.find(sv=>sv.name===s.name))],
     salesTotal,bag,drawerBill,
+    stockCountLog:products.map((p,i)=>{
+      const st=Number($('st'+i)?.value)||0,ad=Number($('ad'+i)?.value)||0;
+      const sl=Number($('sl'+i)?.value)||0,fr=Number($('fr'+i)?.value)||0;
+      const lf=$('lf'+i)?.value;
+      if(lf==='')return null;
+      const exp=st+ad-sl-fr;const actual=Number(lf)||0;
+      return{name:p.name,expected:exp,actual,diff:actual-exp};
+    }).filter(x=>x),
     dailyAdult,dailyKid,monthOld,monthNew,
     expenseNote:getExpensesData().map(e=>e.note+(e.amount?'(฿'+e.amount+')':'')).join(', '),
     drawerNote:$('drawerNoteText')?.value||'',
@@ -993,7 +1002,7 @@ async function checkAndSendTg(){
     }
   });
   if(!alerts.length)return;
-  const now=new Date().toLocaleString('th-TH');
+  const now=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
   const crit=alerts.filter(a=>a.remain<=0);
   const warn=alerts.filter(a=>a.remain>0);
   let msg=`🏋️ <b>Lucky Gym — แจ้งเตือนสต๊อก</b>\n📅 ${now}\n`;
@@ -1039,7 +1048,7 @@ async function saveShift(){
   });
   saveWarehouse();
   checkAndSendTg().catch(()=>{});
-  const rec={...lastC,createdAt:new Date().toLocaleString('th-TH')};
+  const rec={...lastC,createdAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})};
   records.push(rec);
   localStorage.setItem('lucky_records',JSON.stringify(records));
   renderHist();
@@ -1065,7 +1074,15 @@ async function loadOnline(){
     if(rows.length<=1){alert('ไม่มีข้อมูลใน Sheets');return;}
     const online=rows.slice(1).map(r=>{
       let sd=[];try{sd=JSON.parse(r[13]||'[]');}catch(e){}
-      return{date:String(r[0]||''),staff:String(r[1]||''),stockSales:Number(r[2])||0,cash:Number(r[3])||0,transfer:Number(r[4])||0,expense:Number(r[5])||0,posGrand:Number(r[6])||0,posDiff:Number(r[7])||0,stockDiff:Number(r[8])||0,diff:Number(r[9])||0,stockMismatch:Number(r[10])||0,appGrand:Number(r[11])||0,createdAt:String(r[12]||''),salesData:sd,salesTotal:sd.reduce((s,x)=>s+(x.subtotal||0),0)};
+      const rawDate=String(r[0]||'');
+      // แปลง UTC timestamp เป็น TH date
+      let thDate=rawDate;
+      if(rawDate.includes('T')){
+        const d=new Date(rawDate);
+        const th=new Date(d.toLocaleString('en-US',{timeZone:'Asia/Bangkok'}));
+        thDate=th.getFullYear()+'-'+String(th.getMonth()+1).padStart(2,'0')+'-'+String(th.getDate()).padStart(2,'0');
+      }
+      return{date:thDate,staff:String(r[1]||''),stockSales:Number(r[2])||0,cash:Number(r[3])||0,transfer:Number(r[4])||0,expense:Number(r[5])||0,posGrand:Number(r[6])||0,posDiff:Number(r[7])||0,stockDiff:Number(r[8])||0,diff:Number(r[9])||0,stockMismatch:Number(r[10])||0,appGrand:Number(r[11])||0,createdAt:String(r[12]||''),salesData:sd,salesTotal:sd.reduce((s,x)=>s+(x.subtotal||0),0)};
     }).filter(r=>r.createdAt);
     const keys=new Set(records.map(r=>r.createdAt));
     let added=0;
@@ -1177,11 +1194,22 @@ function buildToday(){
     h+=`<div style="font-weight:700;font-size:13px;color:var(--red);margin:10px 0 6px">❌ สต๊อกไม่ตรง</div>`;
     h+=d.stockIssues.map(s=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--redbg)"><span style="color:var(--red)">${s.name}</span><span>เหลือ ${s.left} คาด ${s.exp} <span style="color:var(--red)">(${s.diff>0?'+':''}${s.diff})</span></span></div>`).join('');
   }
+  // log นับสต๊อก
+  if(d.stockCountLog?.length){
+    h+=`<div style="font-weight:700;font-size:13px;color:var(--bl);margin:12px 0 6px">📋 บันทึกนับสต๊อก (${d.stockCountLog.length} รายการ)</div>`;
+    h+=`<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden">`;
+    h+=`<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;font-size:11px;font-weight:700;color:var(--mu);padding:6px 10px;border-bottom:1px solid var(--border);background:var(--sb-bg)"><span>รายการ</span><span style="text-align:center">คาด</span><span style="text-align:center">นับจริง</span><span style="text-align:center">ต่าง</span></div>`;
+    h+=d.stockCountLog.map(s=>{
+      const ok=s.diff===0;
+      return`<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;font-size:12px;padding:6px 10px;border-bottom:1px solid var(--border)"><span>${s.name}</span><span style="text-align:center">${s.expected}</span><span style="text-align:center;font-weight:700">${s.actual}</span><span style="text-align:center;font-weight:700;color:${ok?'var(--g)':'var(--red)'}">${ok?'✅':(s.diff>0?'+':'')+s.diff}</span></div>`;
+    }).join('');
+    h+=`</div>`;
+  }
   return h;
 }
 
 function buildPeriod(period){
-  const now=new Date();
+  const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Bangkok'}));
   let fl=records.filter(r=>{
     if(!r.date)return false;
     const d=new Date(r.date);
@@ -1271,6 +1299,7 @@ function renderHistDay(date){
         ${r.bag>0?`<div class="sb ok" style="grid-column:span 2"><div class="sb-lbl">💰 เงินใส่ถุง</div><div style="font-weight:900;font-size:18px;color:var(--g)">${money(r.bag||0)}</div></div>`:''}
       </div>
       ${r.salesData?.length?`<div style="font-weight:700;font-size:12px;color:var(--mu);margin-bottom:6px">🛒 รายการขาย (${r.salesData.length} รายการ)</div><div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:10px">${salesRows}<div style="display:flex;justify-content:space-between;padding:8px 0 0;font-weight:800;font-size:14px"><span>รวม</span><span style="color:var(--g)">${money(r.salesTotal||0)}</span></div></div>`:''}
+      ${r.stockCountLog?.length?`<div style="font-weight:700;font-size:12px;color:var(--bl);margin-bottom:6px">📋 บันทึกนับสต๊อก (${r.stockCountLog.length} รายการ)</div><div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px"><div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;font-size:11px;font-weight:700;color:var(--mu);padding:6px 10px;border-bottom:1px solid var(--border);background:var(--sb-bg)"><span>รายการ</span><span style="text-align:center">คาด</span><span style="text-align:center">นับจริง</span><span style="text-align:center">ต่าง</span></div>${r.stockCountLog.map(s=>{const ok=s.diff===0;return`<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;font-size:12px;padding:6px 10px;border-bottom:1px solid var(--border)"><span>${s.name}</span><span style="text-align:center">${s.expected}</span><span style="text-align:center;font-weight:700">${s.actual}</span><span style="text-align:center;font-weight:700;color:${ok?'var(--g)':'var(--red)'}">${ok?'✅':(s.diff>0?'+':'')+s.diff}</span></div>`;}).join('')}</div>`:''}
       ${ok?`<div style="background:var(--gbg);border:1px solid var(--g);border-radius:10px;padding:10px;font-size:13px;font-weight:700;color:var(--g)">✅ ยอดตรงทุกส่วน</div>`:issues.map(iss=>{const isOk=iss.diff===0;return`<div style="display:flex;gap:10px;padding:10px;border-radius:10px;margin-bottom:6px;border:1px solid ${isOk?'var(--g)':'var(--red)'};background:${isOk?'var(--gbg)':'var(--redbg)'}"><span style="font-size:18px">${isOk?'✅':'❌'}</span><div><div style="font-weight:700;font-size:13px">${iss.label}</div><div style="font-size:12px;color:var(--mu)">${iss.reason}</div></div></div>`;}).join('')}
     </div>`;
   }).join('');
@@ -1302,7 +1331,7 @@ function buildTgCfg(){
   const thrRows=products.map((p,i)=>`
     <div style="display:grid;grid-template-columns:1fr 80px;gap:8px;align-items:center;margin-bottom:5px">
       <div style="font-size:13px">${p.name} <span style="color:var(--mu);font-size:11px">(def ${SPECIAL_THR[p.name]||DEFAULT_THR})</span></div>
-      <input type="number" id="thr${i}" value="${thrData[p.name]!==undefined?thrData[p.name]:(SPECIAL_THR[p.name]||DEFAULT_THR)}" min="0" inputmode="numeric" style="text-align:center;font-size:14px;font-weight:700;padding:7px;border-radius:9px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)">
+      <input type="number" id="thr${i}" value="${thrData[p.name]!==undefined?thrData[p.name]:(SPECIAL_THR[p.name]||DEFAULT_THR)}" min="0" inputmode="decimal" style="text-align:center;font-size:14px;font-weight:700;padding:7px;border-radius:9px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)">
     </div>`).join('');
   return`<div>
     <div style="font-weight:700;font-size:13px;color:#229ED9;margin-bottom:8px">📲 Telegram Bot</div>
@@ -1344,14 +1373,15 @@ async function testTg(){
 }
 
 function exportCSV(period){
-  let fl=records;const now=new Date();
+  let fl=records;const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Bangkok'}));
   if(period==='week'){const sw=new Date(now);sw.setDate(now.getDate()-now.getDay());sw.setHours(0,0,0,0);fl=records.filter(r=>r.date&&new Date(r.date)>=sw);}
   else if(period==='month'){fl=records.filter(r=>r.date&&new Date(r.date).getMonth()===now.getMonth()&&new Date(r.date).getFullYear()===now.getFullYear());}
   const rows=[['วันที่','กะ','พนักงาน','รายได้รวม','ยอดสินค้า','ยอดบริการ','เงินสด','โอน','POS','รายจ่าย','เงินใส่ถุง','ผลต่าง','บันทึกเมื่อ']];
   fl.forEach(r=>rows.push([r.date,r.shift||'เช้า',r.staff,(r.appGrand||0)+(r.salesTotal||0),r.stockSales,r.salesTotal,r.cash,r.transfer,r.posGrand,r.expense,r.bag||0,r.diff,r.createdAt]));
   const csv='\uFEFF'+rows.map(r=>r.map(c=>'"'+(c||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`lucky-gym-${period}-${new Date().toISOString().slice(0,10)}.csv`;a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);const dlDate=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Bangkok'}));
+  a.download=`lucky-gym-${period}-${dlDate.getFullYear()}-${String(dlDate.getMonth()+1).padStart(2,'0')}-${String(dlDate.getDate()).padStart(2,'0')}.csv`;a.click();
 }
 
 async function syncStateFromServer(){
@@ -1378,7 +1408,8 @@ function init(){
   ownerPin=localStorage.getItem('lucky_pin')||'1234';
   const savedTheme=localStorage.getItem('lucky_theme')||'light';
   if(savedTheme==='dark'){document.body.classList.add('dark');const b=$('themeBtn');if(b)b.innerText='☀️';}
-  document.getElementById('iDate').valueAsDate=new Date();
+  const nowTH=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Bangkok'}));
+  document.getElementById('iDate').value=nowTH.getFullYear()+'-'+String(nowTH.getMonth()+1).padStart(2,'0')+'-'+String(nowTH.getDate()).padStart(2,'0');
   makeMoney('openCash','o');
   makeMoney('closeCash','c');
   makeMoney('drawerBillCash','db');
