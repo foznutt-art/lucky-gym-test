@@ -401,7 +401,7 @@ textarea{min-height:80px;font-size:13px;resize:vertical}
 const GAS='https://script.google.com/macros/s/AKfycbxJupKM-sQV9fvaqIvHInKLxa_I-1uA47BZHqCzMCslOGJB4VCco0gckMApj76TiTyncw/exec';
 const products=[{"cat":"เครื่องดื่ม","name":"น้ำเปล่า เล็ก","price":10},{"cat":"เครื่องดื่ม","name":"น้ำเปล่า ใหญ่","price":15},{"cat":"เครื่องดื่ม","name":"น้ำแร่ เล็ก","price":15},{"cat":"เครื่องดื่ม","name":"น้ำแร่ ใหญ่","price":25},{"cat":"เครื่องดื่ม","name":"เกลือแร่ยันฮี","price":15},{"cat":"เครื่องดื่ม","name":"เกเตอเรด ฟ้า","price":20},{"cat":"เครื่องดื่ม","name":"เกเตอเรด เหลือง","price":20},{"cat":"เครื่องดื่ม","name":"เกเตอเรด องุ่น","price":30},{"cat":"เครื่องดื่ม","name":"เกเตอเรด สตรอ","price":30},{"cat":"เครื่องดื่ม","name":"โค้ก zero","price":17},{"cat":"เครื่องดื่ม","name":"โค้ก original","price":17},{"cat":"เครื่องดื่ม","name":"ชเวป","price":17},{"cat":"เครื่องดื่ม","name":"ชเวป zero","price":17},{"cat":"เครื่องดื่ม","name":"แฟนต้า แดง","price":17},{"cat":"เครื่องดื่ม","name":"แฟนต้า ส้ม","price":17},{"cat":"เครื่องดื่ม","name":"แฟนต้า เขียว","price":17},{"cat":"เครื่องดื่ม","name":"ยันฮี","price":20},{"cat":"เครื่องดื่ม","name":"มินิทเมด","price":20},{"cat":"เครื่องดื่ม","name":"ลิปตัน","price":15},{"cat":"เครื่องดื่ม","name":"นมไฮโปรตีน","price":50},{"cat":"เครื่องดื่ม","name":"อกไก่ปั่น LF","price":110},{"cat":"เครื่องดื่ม","name":"อกไก่ปั่น max","price":100},{"cat":"เครื่องดื่ม","name":"โทฟูซัง","price":45},{"cat":"เครื่องดื่ม","name":"Benefitt","price":50},{"cat":"เครื่องดื่ม","name":"น้ำมะพร้าว","price":30},{"cat":"เครื่องดื่ม","name":"โอ๊ตผลไม้","price":45},{"cat":"ขนม/อื่นๆ","name":"กล้วยหอม","price":10},{"cat":"ขนม/อื่นๆ","name":"ป็อกกี้","price":10},{"cat":"ขนม/อื่นๆ","name":"ทาโร่","price":25},{"cat":"ขนม/อื่นๆ","name":"Julies","price":10},{"cat":"ขนม/อื่นๆ","name":"การาโนล่า","price":15},{"cat":"ขนม/อื่นๆ","name":"ขนมข้าวกล้องอบ","price":30},{"cat":"ขนม/อื่นๆ","name":"หงส์ไทย","price":40},{"cat":"ขนม/อื่นๆ","name":"หงส์ไทยหลอด","price":35},{"cat":"ขนม/อื่นๆ","name":"ยาดม โป๊ยเซียน","price":30},{"cat":"ขนม/อื่นๆ","name":"ยาดม ครูเฟิร์น","price":89},{"cat":"ขนม/อื่นๆ","name":"เวย์ ผง","price":45},{"cat":"ขนม/อื่นๆ","name":"ถุงเท้า","price":30},{"cat":"ขนม/อื่นๆ","name":"ไอติม โมจิ","price":40},{"cat":"ขนม/อื่นๆ","name":"ไอติม 80ml","price":45},{"cat":"ขนม/อื่นๆ","name":"เสื้อกันฝน","price":30}];
 const FRIDGE_ITEMS=["น้ำเปล่า เล็ก","น้ำเปล่า ใหญ่","น้ำแร่ เล็ก","น้ำแร่ ใหญ่","เกลือแร่ยันฮี","เกเตอเรด ฟ้า","เกเตอเรด เหลือง","เกเตอเรด องุ่น","เกเตอเรด สตรอ","โค้ก zero","โค้ก original","ชเวป","ชเวป zero","แฟนต้า แดง","แฟนต้า ส้ม","แฟนต้า เขียว","ยันฮี","มินิทเมด","ลิปตัน","นมไฮโปรตีน","อกไก่ปั่น LF","อกไก่ปั่น max","โทฟูซัง","Benefitt","น้ำมะพร้าว","โอ๊ตผลไม้"];
-const SERVICES=[{cat:'สมาชิก',name:'รายวันผู้ใหญ่',price:90},{cat:'สมาชิก',name:'รายวันเด็ก',price:70},{cat:'สมาชิก',name:'รายเดือน เก่า',price:950},{cat:'สมาชิก',name:'รายเดือน ใหม่',price:950},{cat:'สมาชิก',name:'รายเดือน เทรนเนอร์',price:800},{cat:'สมาชิก',name:'ราย 3 เดือน',price:2850},{cat:'สมาชิก',name:'ราย 6 เดือน',price:5700},{cat:'สมาชิก',name:'ราย 1 ปี',price:11400},{cat:'บริการ',name:'PT session',price:0},{cat:'บริการ',name:'ผ้าขนหนูS',price:20},{cat:'บริการ',name:'ผ้าขนหนูL',price:30},{cat:'บริการ',name:'เครื่องชั่ง',price:50},{cat:'บริการ',name:'อื่นๆ',price:0}];
+const SERVICES=[{cat:'สมาชิก',name:'รายวันผู้ใหญ่',price:90},{cat:'สมาชิก',name:'รายวันเด็ก',price:70},{cat:'สมาชิก',name:'รายวันผู้ใหญ่ ลด20',price:70},{cat:'สมาชิก',name:'รายวันเด็ก ลด20',price:50},{cat:'สมาชิก',name:'รายวันผู้ใหญ่ +น้ำแร่',price:90},{cat:'สมาชิก',name:'รายวันเด็ก +น้ำแร่',price:70},{cat:'สมาชิก',name:'รายเดือน เก่า',price:950},{cat:'สมาชิก',name:'รายเดือน ใหม่',price:950},{cat:'สมาชิก',name:'รายเดือน เทรนเนอร์',price:800},{cat:'สมาชิก',name:'ราย 3 เดือน',price:2850},{cat:'สมาชิก',name:'ราย 6 เดือน',price:5700},{cat:'สมาชิก',name:'ราย 1 ปี',price:11400},{cat:'บริการ',name:'PT session',price:0},{cat:'บริการ',name:'ผ้าขนหนูS',price:20},{cat:'บริการ',name:'ผ้าขนหนูL',price:30},{cat:'บริการ',name:'เครื่องชั่ง',price:50},{cat:'บริการ',name:'อื่นๆ',price:0}];
 const BILLS=[1000,500,100,50,20,10,5,2,1];
 const UNIT_MAP={'น้ำเปล่า เล็ก':{unit:'แพค',size:12},'น้ำเปล่า ใหญ่':{unit:'แพค',size:6},'น้ำแร่ เล็ก':{unit:'แพค',size:15},'น้ำแร่ ใหญ่':{unit:'แพค',size:8},'เกลือแร่ยันฮี':{unit:'แพค',size:12},'เกเตอเรด ฟ้า':{unit:'แพค',size:12},'เกเตอเรด เหลือง':{unit:'แพค',size:12},'เกเตอเรด องุ่น':{unit:'แพค',size:12},'เกเตอเรด สตรอ':{unit:'แพค',size:12},'Benefitt':{unit:'แพค',size:3},'น้ำมะพร้าว':{unit:'แพค',size:24},'โค้ก zero':{unit:'ถาด',size:24},'โค้ก original':{unit:'ถาด',size:24},'ชเวป':{unit:'ถาด',size:24},'ชเวป zero':{unit:'ถาด',size:24},'แฟนต้า แดง':{unit:'ถาด',size:24},'แฟนต้า ส้ม':{unit:'ถาด',size:24},'แฟนต้า เขียว':{unit:'ถาด',size:24}};
 const DEFAULT_THR=20;
@@ -635,15 +635,41 @@ function getServicesData(){
   return rows;
 }
 
+function getPromoWaterQty(){
+  // จำนวนน้ำแร่ใหญ่ที่แจกจากโปร +น้ำแร่ (อัตโนมัติ)
+  let qty=0;
+  SERVICES.forEach((s,i)=>{
+    if(s.name.includes('+น้ำแร่')){qty+=Number($('svcn'+i)?.value)||0;}
+  });
+  return qty;
+}
+
 function stockCalc(){
   let sales=0,mm=0,det=[];
+  const promoWater=getPromoWaterQty();
+  const waterIdx=products.findIndex(p=>p.name==='น้ำแร่ ใหญ่');
   products.forEach((p,i)=>{
     const st=Number($('st'+i)?.value)||0;
     const ad=Number($('ad'+i)?.value)||0;
     const sl=Number($('sl'+i)?.value)||0;
-    const fr=Number($('fr'+i)?.value)||0;
+    let fr=Number($('fr'+i)?.value)||0;
+    if(i===waterIdx&&promoWater>0)fr+=promoWater; // ตัดโปรน้ำแร่อัตโนมัติ
     const lf=Number($('lf'+i)?.value)||0;
     const exp=st+ad-sl-fr;
+    // แสดง hint โปรใต้ card น้ำแร่ใหญ่
+    if(i===waterIdx){
+      let hintEl=document.getElementById('promoWaterHint');
+      const row=document.getElementById('sr'+i);
+      if(promoWater>0&&row){
+        if(!hintEl){
+          hintEl=document.createElement('div');
+          hintEl.id='promoWaterHint';
+          hintEl.style.cssText='font-size:11px;color:var(--or);font-weight:700;padding:4px 0';
+          row.appendChild(hintEl);
+        }
+        hintEl.innerText=`🎁 ฟรีจากโปร +น้ำแร่ ${promoWater} ขวด (ตัดอัตโนมัติ)`;
+      }else if(hintEl){hintEl.remove();}
+    }
     const has=st||ad||sl||fr||lf;
     const eb=$('ex'+i);const row=$('sr'+i);
     if(has){
@@ -789,7 +815,7 @@ function calc(){
   set('sPosCash',posCash);set('sPOS',posGrand);set('sExp',expense);set('sOpen',open);set('sClose',close);
   set('sSalesBaht',salesTotal);
   const smEl=$('sSalesMember');
-  if(smEl){const totalM=getServicesData().filter(s=>['รายวันผู้ใหญ่','รายวันเด็ก'].includes(s.name)).reduce((a,s)=>a+s.qty,0);smEl.innerText=totalM+' คน';}
+  if(smEl){const totalM=getServicesData().filter(s=>s.name.startsWith('รายวัน')).reduce((a,s)=>a+s.qty,0);smEl.innerText=totalM+' คน';}
   // 3 ยอด
   const totalReal=cash+transfer;
   const totalPOS=posCash+posTransfer;
@@ -841,10 +867,10 @@ function calc(){
   }
   // สมาชิก
   const svcs=getServicesData();
-  const dailyAdult=svcs.filter(s=>s.name==='รายวันผู้ใหญ่').reduce((a,s)=>a+s.qty,0);
-  const dailyKid=svcs.filter(s=>s.name==='รายวันเด็ก').reduce((a,s)=>a+s.qty,0);
-  const dailyAdultAmt=svcs.filter(s=>s.name==='รายวันผู้ใหญ่').reduce((a,s)=>a+s.subtotal,0);
-  const dailyKidAmt=svcs.filter(s=>s.name==='รายวันเด็ก').reduce((a,s)=>a+s.subtotal,0);
+  const dailyAdult=svcs.filter(s=>s.name.startsWith('รายวันผู้ใหญ่')).reduce((a,s)=>a+s.qty,0);
+  const dailyKid=svcs.filter(s=>s.name.startsWith('รายวันเด็ก')).reduce((a,s)=>a+s.qty,0);
+  const dailyAdultAmt=svcs.filter(s=>s.name.startsWith('รายวันผู้ใหญ่')).reduce((a,s)=>a+s.subtotal,0);
+  const dailyKidAmt=svcs.filter(s=>s.name.startsWith('รายวันเด็ก')).reduce((a,s)=>a+s.subtotal,0);
   const monthOld=svcs.filter(s=>s.name==='รายเดือน เก่า').reduce((a,s)=>a+s.qty,0);
   const monthNew=svcs.filter(s=>s.name==='รายเดือน ใหม่').reduce((a,s)=>a+s.qty,0);
   const monthOldAmt=svcs.filter(s=>s.name==='รายเดือน เก่า').reduce((a,s)=>a+s.subtotal,0);
@@ -1175,6 +1201,13 @@ function buildToday(){
     <div class="sb"><div class="sb-lbl">รายจ่าย</div><div class="sb-val" style="color:var(--red)">${money(d.expense||0)}</div></div>
   </div>`;
   if(d.bag>0)h+=`<div class="sb ok" style="margin-bottom:10px"><div class="sb-lbl">💰 เงินใส่ถุง</div><div class="sb-val" style="color:var(--g)">${money(d.bag||0)}</div></div>`;
+  // pre-sale วันนี้
+  const psToday=(d.salesData||[]).filter(s=>(s.name||'').includes('Pre-sale'));
+  if(psToday.length){
+    const psQty=psToday.reduce((a,s)=>a+s.qty,0);
+    const psAmt=psToday.reduce((a,s)=>a+s.subtotal,0);
+    h+=`<div class="sb warn" style="margin-bottom:10px"><div class="sb-lbl">🔥 Pre-sale กะนี้</div><div class="sb-val">${psQty} แพ็ก = <span style="color:var(--g)">${money(psAmt)}</span></div></div>`;
+  }
   if(d.dailyAdult||d.dailyKid||d.monthOld||d.monthNew){
     h+=`<div style="font-weight:700;font-size:13px;color:var(--bl);margin-bottom:7px">👥 สรุปสมาชิก</div>`;
     h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
@@ -1231,6 +1264,20 @@ function buildPeriod(period){
     <div class="sb ${ti-te>=0?'ok':'bad'}"><div class="sb-lbl">กำไรสุทธิ</div><div class="sb-val">${money(ti-te)}</div></div>
     <div class="sb"><div class="sb-lbl">เงินสดรวม</div><div class="sb-val">${money(tc)}</div></div>
   </div>`;
+  // สรุป pre-sale
+  const psRows=[];
+  fl.forEach(r=>{(r.salesData||[]).forEach(s=>{if((s.name||'').includes('Pre-sale'))psRows.push(s);});});
+  if(psRows.length){
+    const ps6=psRows.filter(s=>s.name.includes('6')).reduce((a,s)=>a+s.qty,0);
+    const ps12=psRows.filter(s=>s.name.includes('12')).reduce((a,s)=>a+s.qty,0);
+    const psTotal=psRows.reduce((a,s)=>a+s.subtotal,0);
+    h+=`<div style="font-weight:700;font-size:13px;color:var(--or);margin-bottom:7px">🔥 Pre-sale สะสม</div>`;
+    h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
+      <div class="sb"><div class="sb-lbl">6 เดือน</div><div style="font-weight:900;font-size:16px">${ps6} แพ็ก</div></div>
+      <div class="sb"><div class="sb-lbl">12 เดือน</div><div style="font-weight:900;font-size:16px">${ps12} แพ็ก</div></div>
+      <div class="sb ok"><div class="sb-lbl">💰 เงินสดรวม</div><div style="font-weight:900;font-size:16px;color:var(--g)">${money(psTotal)}</div></div>
+    </div>`;
+  }
   if(totalDA||totalDK||totalMO||totalMN){
     h+=`<div style="font-weight:700;font-size:13px;color:var(--bl);margin-bottom:7px">👥 สรุปสมาชิก</div>`;
     h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
